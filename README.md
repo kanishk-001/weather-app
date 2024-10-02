@@ -27,7 +27,7 @@ To run this project locally on your machine:
 
 1. **Clone the Repository:**
    ```bash
-   git clone 
+   git clone https://github.com/kanishk-001/weather-app.git
     ```
 2. **Navigate to the Project Directory:**
    ```bash
