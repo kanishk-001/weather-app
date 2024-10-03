@@ -18,8 +18,14 @@ It allows users to check the weather information for a specific location.
 
 # Website Preview
    - **Before Search:**
-      
-   - **After Search:**      
+
+     <img width="830" alt="1" src="https://github.com/user-attachments/assets/e70e17ee-fb08-4e63-9bbe-b5f33a4075d8">
+
+ 
+   - **After Search:**
+
+      <img width="803" alt="2" src="https://github.com/user-attachments/assets/b1516eb7-d96a-4e58-8255-a5b6d247b34d">
+
 
 ## Getting Started
 
