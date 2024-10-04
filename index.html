@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+            href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+            rel="stylesheet"
+    />
+    <title>Weather Web App</title>
+</head>
+<body>
+<div class="home" id="home">
+    <div  id="particles-js"></div>
+<!-- dark mode toggle -->
+<div class="dark-mode">
+      <span class="dark-mode-btn">
+        <i class="bx bx-moon"></i>
+      </span>
+</div>
+<!-- main content -->
+<center><div class="wrapper">
+    <marquee style="color: #9c9388a1;margin-top:6px" direction="left" scrollamount="3">Created By
+        <b><a style="text-decoration: none;color: aqua" href="https://github.com/kanishk-001"> Kanishk </a> </b><span id="contactspan"></span>
+    </marquee>
+    <header><i class="bx bx-left-arrow-alt"></i>Weather App</header>
+    <section class="input-part">
+        <p class="info-txt"></p>
+        <div class="content">
+            <input
+                    type="text"
+                    spellcheck="false"
+                    placeholder="Enter City Name"
+                    required
+            />
+            <div class="separator"></div>
+            <button>Location auto-detect</button>
+        </div>
+    </section>
+    <section class="weather-part">
+        <img src="" alt="Weather Icon" />
+        <div class="temp">
+            <span class="numb">_</span>
+            <span class="deg">°</span>C
+        </div>
+        <div class="weather">_ _</div>
+        <div class="location">
+            <i class="bx bx-map"></i>
+            <span>_, _</span>
+        </div>
+        <div class="bottom-details">
+            <div class="column feels">
+                <i class="bx bxs-thermometer"></i>
+                <div class="details">
+                    <div class="temp">
+                        <span class="numb-2">_</span>
+                        <span class="deg">°</span>C
+                    </div>
+                    <p>Feels like</p>
+                </div>
+            </div>
+            <div class="column humidity">
+                <i class="bx bxs-droplet-half"></i>
+                <div class="details">
+                    <span>_</span>
+                    <p>Humidity</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div></center>
+<script src="assets/js/script.js"></script>
+    <script src="assets/js/particles.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="assets/js/security.js"></script>
+</div>
+</body>
+</html>
