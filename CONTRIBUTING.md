@@ -57,12 +57,7 @@ We encourage small, focused PRs that are easier to review and discuss.
     cd weather-app
     ```
 
-2. Install dependencies:
-    ```bash
-    npm install
-    ```
-
-3. Run the app locally:
+2. Run the app locally:
     ```bash
     npm start
     ```
