@@ -127,7 +127,7 @@ header i {
     color: var(--text-color);
     cursor: pointer;
     background: var(--primary-color);
-    box-shadow: 0 8px 16px 0px rgba(19, 23, 81, 0.76);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     transition: 0.3s ease;
 }
 .input-part button:hover {
