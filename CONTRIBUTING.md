@@ -56,11 +56,7 @@ We encourage small, focused PRs that are easier to review and discuss.
     git clone https://github.com/YOUR-USERNAME/weather-app.git
     cd weather-app
     ```
-
-2. Run the app locally:
-    ```bash
-    npm start
-    ```
+To run this project locally on your machine, open the index.html file in your web browser.
 
 The app should now be running on `http://localhost:3000`.
 
