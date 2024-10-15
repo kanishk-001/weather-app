@@ -29,12 +29,21 @@
     <section class="input-part">
         <p class="info-txt"></p>
         <div class="content">
-            <input
-                    type="text"
-                    spellcheck="false"
-                    placeholder="Enter City Name"
-                    required
-            />
+            <input  list="cities" type="text" spellcheck="false" placeholder="Select or Enter City Name" required />
+            <datalist id="cities">
+                <option value="Bangalore">
+                <option value="Beijing">
+                <option value="Chicago">
+                <option value="Chennai">
+                <option value="Delhi">
+                <option value="Lucknow">
+                <option value="Mumbai">
+                <option value="Noida">
+                <option value="New York">
+                <option value="Tokyo">
+            </datalist>
+
+
             <div class="separator"></div>
             <button>Location auto-detect</button>
         </div>
