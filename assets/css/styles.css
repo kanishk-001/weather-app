@@ -241,7 +241,19 @@ header i {
     font-size: 20px;
     cursor: pointer;
 }
+/* Div styling for the seqarch icon */
+.searchbar{
+    position: relative;
+}
+.iconcontainer{
+    height: 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 1%;
+    top: 2%;
+    cursor: pointer;
 
+}
 /* Media Queries */
 @media only screen and (max-width: 436px) {
     .wrapper {

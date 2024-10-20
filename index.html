@@ -29,6 +29,12 @@
     <section class="input-part">
         <p class="info-txt"></p>
         <div class="content">
+            <!-- Added a div to contain the search bar icon -->
+            <div class="searchbar"> 
+                <!-- Icon container -->
+                <div class="iconcontainer">
+                    <img src="./assets/icons/Searchicon.png" alt="" />
+                </div>
             <input  list="cities" type="text" spellcheck="false" placeholder="Select or Enter City Name" required />
             <datalist id="cities">
                 <option value="Bangalore">
@@ -42,8 +48,7 @@
                 <option value="New York">
                 <option value="Tokyo">
             </datalist>
-
-
+            </div>
             <div class="separator"></div>
             <button>Location auto-detect</button>
         </div>
@@ -88,6 +93,11 @@
         </div>
     </section>
 </div></center>
+<section class="footer" id="footer">
+    <div class="container">
+        <p>&copy; 2024 Weather Web App. All rights reserved.</p>
+    </div>
+</section>
 <script src="assets/js/script.js"></script>
     <script src="assets/js/particles.min.js"></script>
     <script src="assets/js/app.js"></script>
