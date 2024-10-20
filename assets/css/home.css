@@ -1,287 +1,149 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
     line-height: 1.6;
 }
 
-/* navigation bar */
-.navbar {
-    background-color: #333;
-    color: white;
-    padding: 0.7rem 1.7rem;
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
 }
 
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.navbar {
+    background: #2c3e50;
+    color: #ffffff;
+    padding: 15px 0;
 }
-.logo {
-    padding: 0;
-    margin: 0;
-}
-.logo img {
-    height: 2.5rem;
-    width: 2.5rem;
+
+.navbar .logo img {
+    height: 40px;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    align-self: center;
-    justify-content: center;
-    gap: 10px;
+    justify-content: flex-end;
 }
 
 .nav-links li {
-    display: inline;
-    margin-left: 1rem;
+    margin-left: 20px;
 }
 
 .nav-links a {
-    color: white;
+    color: #ffffff;
     text-decoration: none;
-    font-size: 1rem;
+    font-weight: bold;
 }
 
-.nav-links a:hover {
-    text-decoration: underline;
-}
-
-/* Hero section */
 .hero {
-    background: url("https://images.pexels.com/photos/1183099/pexels-photo-1183099.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
-        no-repeat center center/cover;
-    max-height: 100vh;
-    min-height: 95vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: url('https://images.pexels.com/photos/1161644/pexels-photo-1161644.jpeg?auto=compress&cs=tinysrgb&w=1600') no-repeat center center/cover;
+    color: #ffffff;
+    padding: 100px 0;
     text-align: center;
-    color: white;
-    padding: 2rem;
 }
 
 .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
 }
 
 .hero p {
+    margin: 20px 0;
     font-size: 1.2rem;
-    margin-bottom: 2rem;
 }
 
 .btn-get-started {
-    background-color: #007bff;
-    color: white;
-    padding: 0.8rem 1.5rem;
+    background: #e74c3c;
+    color: #ffffff;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    font-size: 1rem;
     text-decoration: none;
-    transition: all 0.3s;
+    font-weight: bold;
 }
 
-.btn-get-started:hover {
-    background-color: #0056b3;
-    cursor: pointer;
+.about, .contact {
+    padding: 50px 0;
 }
 
-/* About Us Section */
-.about {
-    background-color: #f4f4f4;
+.section-title {
     text-align: center;
-    padding: 3rem 2rem;
-}
-
-.about .about_title {
     margin-bottom: 20px;
+    font-size: 2rem;
+    color: #2c3e50;
 }
 
-.about h2 {
-    font-size: 2.5rem;
-}
-.about .container {
+.about-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 5rem;
-    padding: 5rem 5rem;
-}
-.about .container img {
-    height: 30rem;
-    width: 35rem;
-    border-radius: 20px;
-}
-.about p {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    line-height: 1.8;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
-/* Contact Us Section */
-.contact {
-    background-color: #f4f4f4;
-    padding: 50px 20px;
-    /* min-height: 90vh; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-.contact h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-.contact p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-.contact-form {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
+.about-content img {
+    max-width: 400px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
 }
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .form-group {
     margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
 }
+
 .form-group label {
     display: block;
-    font-weight: bold;
     margin-bottom: 5px;
 }
+
 .form-group input,
 .form-group textarea {
     width: 100%;
     padding: 10px;
-    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    resize: none;
 }
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #007bff;
-}
+
 .btn-submit {
-    background-color: #007bff;
-    color: white;
-    padding: 0.8rem 1.5rem;
+    background: #3498db;
+    color: #ffffff;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s;
 }
+
 .btn-submit:hover {
-    background-color: #0056b3;
+    background: #2980b9;
 }
 
-/* Footer section */
 .footer {
-    background-color: #333;
-    color: white;
+    background: #2c3e50;
+    color: #ffffff;
     text-align: center;
-    padding: 1rem 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    padding: 20px 0;
 }
 
-.footer p {
-    margin: 0;
-    font-size: 0.9rem;
-}
-/* Tablets */
-@media (max-width: 1000px) {
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .nav-links li {
-        display: block;
-        margin: 0.5rem 0;
-    }
-
-    .btn-get-started {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-    }
-
-    .about .container {
-        gap: 2rem;
-        padding: 0 1.5rem;
-    }
+.social-links {
+    margin-top: 10px;
 }
 
-/* Mobile Phones */
-@media (max-width: 480px) {
-    .hero {
-        height: 70vh;
-        padding: 10px;
-    }
-
-    .hero h1 {
-        font-size: 1.5rem;
-    }
-
-    .hero p {
-        font-size: 0.8rem;
-    }
-    .nav-links li {
-        display: block;
-        margin: 0.5rem 0;
-    }
-
-    .btn-get-started {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
-    .about .container {
-        flex-direction: column;
-        gap: 2rem;
-        padding: 0 1rem;
-    }
-    .about p {
-        font-size: 1rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
-    }
-    .about .container img {
-        height: 20rem;
-        width: 20rem;
-        border-radius: 20px;
-    }
-    .contact h2 {
-        font-size: 1.8rem;
-    }
-
-    .contact p {
-        font-size: 0.9rem;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        font-size: 0.9rem;
-    }
-
-    .btn-submit {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-    }
+.social-links a {
+    color: #ffffff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 1.5rem;
 }
