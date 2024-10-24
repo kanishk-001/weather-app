@@ -25,17 +25,24 @@ It allows users to check the weather information for a specific location.
 
    - **Dropdown menu containing famous cities:**
 
-     <img width="830"  alt="2" src="https://github.com/user-attachments/assets/342997ba-a91d-4c32-a155-ef9217ade7d5">
+
+     <img width="830"  alt="2" src="https://github.com/user-attachments/assets/97520c6d-b5d9-4f3e-b7f6-1546b1b3f9a2">
+     
 
  
    - **After Search:**
 
-      <img width="803" alt="3" src="https://github.com/user-attachments/assets/b4c004fc-9378-4852-b3a8-2b44cc12e6dc">
+      <img width="830" alt="3" src="https://github.com/user-attachments/assets/a6670c21-5af5-4d59-8d88-34616d32c76c">
       
-     - **5 days forecast:**
-      <img width="803" alt="4" src="https://github.com/user-attachments/assets/f17d62bf-b7df-4b65-b8b9-f397d75e6db4">
+     
+
+   - **5 days forecast:**
+     
+      <img width="830" alt="4" src="https://github.com/user-attachments/assets/11a1f15c-3727-4b02-afa4-9bdf61a0e62d">
+      
       
        
+
 
 
 
