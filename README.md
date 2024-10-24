@@ -79,6 +79,11 @@ Thanks to all these contributors:
   - [TanviS001](https://github.com/TanviS001)
   - [Pudi-Sravan](https://github.com/Pudi-Sravan)
 
+## Code of Conduct
+
+We are committed to providing a welcoming and inclusive environment for all participants. Please read our Code of Conduct to understand the expected behavior.
+
+[Read our Code of Conduct](./CODE_OF_CONDUCT.md)
 
 ### [Go to Top](#top)
 
