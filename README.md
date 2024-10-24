@@ -60,5 +60,5 @@ To run this project locally on your machine:
 # Contributing
   **Contributions are welcome! If you'd like to contribute by adding features, improving UI, or fixing issues, feel free to fork this repository, make your changes, and submit a pull request.**
 
-[Back to Top](#top)
+<a href="#top" style="position:fixed;bottom:20px;right:20px;padding:10px 20px;background-color:#4CAF50;color:white;text-align:center;border-radius:5px;text-decoration:none;box-shadow:0px 4px 6px rgba(0,0,0,0.1);">Go to Top</a>
 
