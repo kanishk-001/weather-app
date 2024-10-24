@@ -60,12 +60,25 @@ To run this project locally on your machine:
     ```
 3. **Open the Project:**
    - **Open the index.html file in your web browser.**
-# Usage
+## Usage
   -  **Open the index.html file in a web browser.**
   -  **Enter the city or location name in the search bar to view the weather information.**
   -  **Explore the displayed weather details for the current conditions and forecast.**
-# Contributing
+## Contributing
   **Contributions are welcome! If you'd like to contribute by adding features, improving UI, or fixing issues, feel free to fork this repository, make your changes, and submit a pull request.**
 
-[Go to Top](#top)
+## Contributers
+Thanks to all these contributors: 
+  - [kanishk-001](https://github.com/kanishk-001)
+  - [kanishk-2](https://github.com/kanishk-2)
+  - [yazdanhaider](https://github.com/yazdanhaider)
+  - [ATHARVA-MUJUMDAR](https://github.com/ATHARVA-MUJUMDAR)
+  - [AdityaSinha2305](https://github.com/AdityaSinha2305)
+  - [Shivansh-0403](https://github.com/Shivansh-0403)
+  - [Deepankar1484](https://github.com/Deepankar1484)
+  - [TanviS001](https://github.com/TanviS001)
+  - [Pudi-Sravan](https://github.com/Pudi-Sravan)
+
+
+### [Go to Top](#top)
 
