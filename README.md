@@ -1,4 +1,5 @@
-# weather-app
+<a name="top"></a>
+# weather-app 
 
 This project is a weather viewer website created using HTML, CSS, and JavaScript.
 It allows users to check the weather information for a specific location.
@@ -58,4 +59,6 @@ To run this project locally on your machine:
   -  **Explore the displayed weather details for the current conditions and forecast.**
 # Contributing
   **Contributions are welcome! If you'd like to contribute by adding features, improving UI, or fixing issues, feel free to fork this repository, make your changes, and submit a pull request.**
+
+[Back to Top](#top)
 
