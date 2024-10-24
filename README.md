@@ -4,9 +4,9 @@ This project is a weather viewer website created using HTML, CSS, and JavaScript
 It allows users to check the weather information for a specific location.
 
 ## Features
-- **Dark Mode:** The wepage consists of a toggle at the top right corner to chnage to dark mode theme and back to light mode theme.
+- **Dark Mode:** The web page consists of a toggle at the top right corner to change to dark mode and back to light mode theme.
 - **Location Search:** Users can search for weather information by city or location name.
-- **Dropdown Menu:** The webpage consists of a dropdown menu containing names of some famous cities.
+- **Dropdown Menu:** The web page consists of a dropdown menu containing names of some famous cities.
 - **Weather Display:** Display of current weather conditions, temperature, humidity.
 - **Forecast:** Provides a weather forecast along with the forecast of the five consequent days.
 - **Responsive Design:** Optimized for various screen sizes (desktop, tablet, mobile).
