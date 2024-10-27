@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+/* Gives your scrolling a smooth transition */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
