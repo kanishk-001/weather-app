@@ -51,7 +51,8 @@ body {
 /* Hero Section */
 
 .hero {
-    background: url("https://images.pexels.com/photos/10903696/pexels-photo-10903696.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center center/cover; /* Dark-themed weather image */
+    position: relative;
+    overflow: hidden;
     max-height: 100vh;
     min-height: 95vh;
     display: flex;
@@ -62,6 +63,23 @@ body {
     padding: 2rem;
 }
 
+.hero-video {
+    position: absolute;
+    top: 50%; /* Center the video vertically */
+    left: 50%; /* Center the video horizontally */
+    width: 120%; /* Increase width to create zoom-out effect */
+    height: auto; /* Maintain aspect ratio */
+    transform: translate(-50%, -50%) scale(0.89); /* Center and scale down */
+    object-fit: cover; /* Ensures the video covers the entire hero section */
+    z-index: -1; /* Sends the video to the background */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1; /* Keeps the content above the video */
+    color: rgb(230, 227, 223);
+    
+}
 
 .hero h1 {
     font-size: 3rem; 
@@ -72,7 +90,7 @@ body {
 .hero p {
     font-size: 1.5rem; 
     margin-bottom: 2rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
+     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .btn-get-started {
@@ -92,6 +110,7 @@ body {
     color: #fff; 
     cursor: pointer;
 }
+
 
 /* About Us Section */
 .about {
