@@ -67,7 +67,7 @@ To run this project locally on your machine:
 ## Contributing
   **Contributions are welcome! If you'd like to contribute by adding features, improving UI, or fixing issues, feel free to fork this repository, make your changes, and submit a pull request.**
 
-## Contributers
+## Contributors
 Thanks to all these contributors: 
   - [kanishk-001](https://github.com/kanishk-001)
   - [kanishk-2](https://github.com/kanishk-2)
