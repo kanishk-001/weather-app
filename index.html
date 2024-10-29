@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="weatherapp.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
@@ -10,6 +10,39 @@
     />
     <title>Weather Web App</title>
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
+    <style>
+      /* Inline CSS for Weather Alerts */
+      .alerts-part {
+        margin-top: 20px;
+        padding: 10px 15px;
+        background: rgba(255, 0, 0, 0.1);
+        color:white;
+        border-radius: 5px;
+        display: block;/* Initially hidden */
+      }
+      .alerts-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+      }
+      .alerts-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 10px 0;
+      }
+      .alerts-content p {
+        font-size: 14px;
+        margin: 0;
+        padding: 0 10px;
+      }
+      .alerts-header i {
+        font-size: 20px;
+        color:white;
+      }
+    </style>
   </head>
   <body>
     <div class="home" id="home">
@@ -78,6 +111,18 @@
               <button>Location auto-detect</button>
             </div>
           </section>
+          
+          <!-- Weather Alerts Section -->
+          <section class="alerts-part">
+            <div class="alerts-header">
+              <h3>Weather Alerts</h3>
+              <i class="bx bx-chevron-down" onclick="toggleAlerts()"></i>
+            </div>
+            <div class="alerts-content">
+              <p>No current alerts</p>
+            </div>
+          </section>
+          
           <section class="weather-part">
             <img src="" alt="Weather Icon" />
             <div class="temp">
@@ -111,6 +156,7 @@
           </section>
         </div>
       </center>
+      
       <script src="assets/js/script.js"></script>
       <script src="assets/js/particles.min.js"></script>
       <script src="assets/js/app.js"></script>
@@ -121,28 +167,22 @@
         referrerpolicy="no-referrer"
       ></script>
       <script src="assets/js/security.js"></script>
+      <script>
+        // Inline JavaScript for Weather Alerts Toggle
+        function toggleAlerts() {
+          const content = document.querySelector(".alerts-content");
+          const icon = document.querySelector(".alerts-header i");
+          if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+            icon.classList.remove("bx-chevron-up");
+            icon.classList.add("bx-chevron-down");
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            icon.classList.remove("bx-chevron-down");
+            icon.classList.add("bx-chevron-up");
+          }
+        }
+      </script>
     </div>
   </body>
-
-    </section>
-    <!-- Replace the existing forecast-part section with this -->
-    <section class="forecast-part">
-        <h3>5-Day Forecast</h3>
-        <div class="forecast-container">
-            <!-- Forecast items will be dynamically inserted here -->
-        </div>
-    </section>
-</div></center>
-<section class="footer" id="footer">
-    <div class="container">
-        <p>&copy; 2024 Weather Web App. All rights reserved.</p>
-    </div>
-</section>
-<script src="assets/js/script.js"></script>
-    <script src="assets/js/particles.min.js"></script>
-    <script src="assets/js/app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="assets/js/security.js"></script>
-</div>
-</body>
 </html>
