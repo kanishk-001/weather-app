@@ -637,6 +637,62 @@
                   </div>
               </div>
           </section>
+
+          <!-- Clothing Suggestions Section -->
+          <section class="clothing-part weather-card">
+              <h3>
+                <i class="bx bx-closet" style="margin-right: 8px; color: #f59e0b;"></i>
+                Clothing Suggestions
+              </h3>
+              <div class="clothing-container">
+                  <div class="clothing-item" id="clothing-top">
+                      <div class="clothing-icon">
+                          <i class="bx bx-t-shirt"></i>
+                      </div>
+                      <div class="clothing-details">
+                          <h4>Top</h4>
+                          <p id="top-suggestion">Light shirt</p>
+                      </div>
+                  </div>
+                  
+                  <div class="clothing-item" id="clothing-bottom">
+                      <div class="clothing-icon">
+                          <i class="bx bx-shorts"></i>
+                      </div>
+                      <div class="clothing-details">
+                          <h4>Bottom</h4>
+                          <p id="bottom-suggestion">Shorts</p>
+                      </div>
+                  </div>
+                  
+                  <div class="clothing-item" id="clothing-accessories">
+                      <div class="clothing-icon">
+                          <i class="bx bx-glasses-alt"></i>
+                      </div>
+                      <div class="clothing-details">
+                          <h4>Accessories</h4>
+                          <p id="accessories-suggestion">Sunglasses</p>
+                      </div>
+                  </div>
+                  
+                  <div class="clothing-item" id="clothing-footwear">
+                      <div class="clothing-icon">
+                          <i class="bx bx-walk"></i>
+                      </div>
+                      <div class="clothing-details">
+                          <h4>Footwear</h4>
+                          <p id="footwear-suggestion">Sneakers</p>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="clothing-tip">
+                  <div class="tip-icon">
+                      <i class="bx bx-bulb"></i>
+                  </div>
+                  <p id="clothing-tip-text">Perfect weather for outdoor activities!</p>
+              </div>
+          </section>
           </div>
       </center>
       
@@ -740,6 +796,98 @@
 
         // Call function on load
         displaySunTimes();
+
+        // Clothing Suggestions Functionality
+        function updateClothingSuggestions(temperature, weatherCondition, humidity) {
+          const topSuggestion = document.getElementById('top-suggestion');
+          const bottomSuggestion = document.getElementById('bottom-suggestion');
+          const accessoriesSuggestion = document.getElementById('accessories-suggestion');
+          const footwearSuggestion = document.getElementById('footwear-suggestion');
+          const clothingTip = document.getElementById('clothing-tip-text');
+
+          // Temperature-based suggestions
+          if (temperature <= 5) {
+            topSuggestion.textContent = 'Heavy jacket or coat';
+            bottomSuggestion.textContent = 'Thermal pants or jeans';
+            accessoriesSuggestion.textContent = 'Gloves, scarf, hat';
+            footwearSuggestion.textContent = 'Warm boots';
+            clothingTip.textContent = 'Bundle up! It\'s freezing cold outside.';
+          } else if (temperature <= 15) {
+            topSuggestion.textContent = 'Warm sweater or hoodie';
+            bottomSuggestion.textContent = 'Long pants or jeans';
+            accessoriesSuggestion.textContent = 'Light scarf or beanie';
+            footwearSuggestion.textContent = 'Closed shoes or boots';
+            clothingTip.textContent = 'Dress warmly, it\'s quite chilly today.';
+          } else if (temperature <= 25) {
+            topSuggestion.textContent = 'Light jacket or cardigan';
+            bottomSuggestion.textContent = 'Jeans or long pants';
+            accessoriesSuggestion.textContent = 'Light jacket';
+            footwearSuggestion.textContent = 'Comfortable sneakers';
+            clothingTip.textContent = 'Perfect weather for layering!';
+          } else if (temperature <= 30) {
+            topSuggestion.textContent = 'T-shirt or light shirt';
+            bottomSuggestion.textContent = 'Shorts or light pants';
+            accessoriesSuggestion.textContent = 'Sunglasses';
+            footwearSuggestion.textContent = 'Light sneakers';
+            clothingTip.textContent = 'Great weather for outdoor activities!';
+          } else {
+            topSuggestion.textContent = 'Light breathable shirt';
+            bottomSuggestion.textContent = 'Light shorts';
+            accessoriesSuggestion.textContent = 'Hat and sunglasses';
+            footwearSuggestion.textContent = 'Sandals or breathable shoes';
+            clothingTip.textContent = 'Stay cool and hydrated in this heat!';
+          }
+
+          // Weather condition modifications
+          if (weatherCondition.toLowerCase().includes('rain') || weatherCondition.toLowerCase().includes('storm')) {
+            accessoriesSuggestion.textContent = 'Umbrella or raincoat';
+            footwearSuggestion.textContent = 'Waterproof shoes';
+            clothingTip.textContent = 'Don\'t forget your umbrella - it\'s going to rain!';
+          } else if (weatherCondition.toLowerCase().includes('snow')) {
+            accessoriesSuggestion.textContent = 'Warm hat and gloves';
+            footwearSuggestion.textContent = 'Snow boots';
+            clothingTip.textContent = 'Perfect weather for building snowmen!';
+          } else if (weatherCondition.toLowerCase().includes('clear') || weatherCondition.toLowerCase().includes('sunny')) {
+            accessoriesSuggestion.textContent = 'Sunglasses and sunscreen';
+            clothingTip.textContent = 'Beautiful sunny day - enjoy the outdoors!';
+          } else if (weatherCondition.toLowerCase().includes('cloud') || weatherCondition.toLowerCase().includes('overcast')) {
+            clothingTip.textContent = 'Cloudy but pleasant weather today.';
+          }
+
+          // High humidity modifications
+          if (humidity > 70) {
+            topSuggestion.textContent = 'Breathable, moisture-wicking fabric';
+            clothingTip.textContent = 'High humidity - choose breathable fabrics!';
+          }
+        }
+
+        // Hook into the weather display to update clothing suggestions
+        // We'll need to modify the wheatherSet function or create a listener
+        // For now, we'll create a function that can be called when weather data is available
+        function onWeatherDataUpdate() {
+          // Try to get current weather data from the displayed elements
+          const tempElement = document.querySelector('.temp .numb');
+          const weatherElement = document.querySelector('.weather');
+          const humidityElement = document.querySelector('.humidity span');
+          
+          if (tempElement && weatherElement && humidityElement) {
+            const temperature = parseInt(tempElement.textContent);
+            const weatherCondition = weatherElement.textContent;
+            const humidity = parseInt(humidityElement.textContent.replace('%', ''));
+            
+            updateClothingSuggestions(temperature, weatherCondition, humidity);
+          }
+        }
+
+        // Call clothing suggestions update periodically or when weather changes
+        setInterval(() => {
+          onWeatherDataUpdate();
+        }, 2000); // Check every 2 seconds for weather data updates
+
+        // Also call it immediately in case weather data is already loaded
+        setTimeout(() => {
+          onWeatherDataUpdate();
+        }, 1000);
       </script>
     </div>
   </body>

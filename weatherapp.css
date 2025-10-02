@@ -1566,3 +1566,191 @@ body[data-theme="dark"] .wrapper::-webkit-scrollbar-thumb {
 body[data-theme="dark"] .wrapper::-webkit-scrollbar-thumb:hover {
     background: rgba(240, 246, 252, 0.5);
 }
+
+/* Clothing Suggestions Section */
+.clothing-part {
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.clothing-part:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.clothing-part h3 {
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.clothing-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.clothing-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.clothing-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
+}
+
+.clothing-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.clothing-icon i {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.clothing-details h4 {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.clothing-details p {
+    color: var(--text-color);
+    font-size: 0.8rem;
+    margin: 0;
+    opacity: 0.8;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.clothing-tip {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(251, 191, 36, 0.2) 100%);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.tip-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3);
+}
+
+.tip-icon i {
+    color: white;
+    font-size: 1rem;
+}
+
+.clothing-tip p {
+    color: var(--text-color);
+    font-size: 0.85rem;
+    margin: 0;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Light Mode Clothing Section */
+[data-theme="light"] .clothing-part {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="light"] .clothing-item {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] .clothing-item:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="light"] .clothing-part h3,
+[data-theme="light"] .clothing-details h4,
+[data-theme="light"] .clothing-details p,
+[data-theme="light"] .clothing-tip p {
+    color: #1e293b !important;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+}
+
+/* Dark Mode Clothing Section */
+[data-theme="dark"] .clothing-part {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .clothing-item {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .clothing-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .clothing-part h3,
+[data-theme="dark"] .clothing-details h4,
+[data-theme="dark"] .clothing-details p,
+[data-theme="dark"] .clothing-tip p {
+    color: var(--text-color-dark) !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Responsive Design for Clothing Section */
+@media (max-width: 768px) {
+    .clothing-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .clothing-item {
+        padding: 12px;
+    }
+    
+    .clothing-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .clothing-details h4 {
+        font-size: 0.85rem;
+    }
+    
+    .clothing-details p {
+        font-size: 0.75rem;
+    }
+}
