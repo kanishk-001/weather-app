@@ -19,31 +19,8 @@ It allows users to check the weather information for a specific location.
 - JavaScript
 
 # Website Preview
-   - **Before Search:**
 
-     <img width="830" alt="1" src="https://github.com/user-attachments/assets/eb07a4a3-24d9-4f9f-b13c-26f4324b520a">
-
-   - **Dropdown menu containing famous cities:**
-
-
-     <img width="830"  alt="2" src="https://github.com/user-attachments/assets/97520c6d-b5d9-4f3e-b7f6-1546b1b3f9a2">
-     
-
- 
-   - **After Search:**
-
-      <img width="830" alt="3" src="https://github.com/user-attachments/assets/a6670c21-5af5-4d59-8d88-34616d32c76c">
-      
-     
-
-   - **5 days forecast:**
-     
-      <img width="830" alt="4" src="https://github.com/user-attachments/assets/11a1f15c-3727-4b02-afa4-9bdf61a0e62d">
-      
-      
-       
-
-
+<img width="1378" height="730" alt="1" src="https://github.com/user-attachments/assets/f528e5b0-fa5e-4d8a-b6b8-10ae8e574ceb" />
 
 
 ## Getting Started
