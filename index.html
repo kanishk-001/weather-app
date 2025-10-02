@@ -2,129 +2,450 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Modern, responsive weather app with real-time weather data, 5-day forecast, and beautiful animations" />
+    <meta name="keywords" content="weather, forecast, temperature, humidity, weather app, responsive" />
+    <meta name="author" content="Kanishk" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Weather Web App" />
+    <meta property="og:description" content="Get real-time weather updates with our modern, responsive weather application" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="weatherapp.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
-    <title>Weather Web App</title>
+    
+    <!-- Favicon -->
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
+    
+    <title>Weather Web App - Real-time Weather Forecast</title>
     <style>
-      /* Alerts CSS */
-      .alerts-part {
-        margin-top: 20px;
-        padding: 10px 15px;
-        background: rgba(255, 0, 0, 0.1);
-        color:white;
-        border-radius: 5px;
-        display: block;
+      /* Enhanced Inline Styles for Components */
+      
+      /* Loading Spinner */
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
       }
-      .alerts-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
       }
-      .alerts-content {
-        max-height: 0;
+      
+      /* Enhanced Search Section */
+      .search-container {
+        position: relative;
+        margin-bottom: 8px;
+      }
+      
+      .search-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(51, 51, 51, 0.6);
+        font-size: 18px;
+        z-index: 1;
+        transition: all 0.3s ease;
+      }
+      
+      .search-container input {
+        padding-left: 50px !important;
+      }
+      
+      .search-container input:focus + .search-icon {
+        color: rgba(102, 126, 234, 0.8);
+        transform: translateY(-50%) scale(1.1);
+      }
+      
+      /* Enhanced App Header */
+      .app-header {
+        background: linear-gradient(135deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.9));
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 20px;
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(20px);
+        text-align: center;
+        position: relative;
         overflow: hidden;
-        transition: max-height 0.3s ease-out;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 10px 0;
+        box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
       }
-      .alerts-content p {
+      
+      /* Dark mode override for app header */
+      body[data-theme="dark"] .app-header {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+      
+      .app-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        animation: shimmer 3s infinite;
+      }
+      
+      @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+      
+      .app-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0 0 8px 0;
+        background: linear-gradient(135deg, #64b5f6, #42a5f5, #1e88e5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .app-subtitle {
         font-size: 14px;
+        color: var(--text-secondary);
         margin: 0;
-        padding: 0 10px;
+        font-weight: 400;
+        position: relative;
+        z-index: 1;
       }
-      .alerts-header i {
-        font-size: 20px;
-        color:white;
+      
+      /* Dark mode overrides for app header */
+      body[data-theme="dark"] .app-subtitle {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      
+      /* Enhanced Credit Section */
+      .credit-section {
+        background: linear-gradient(135deg, rgba(248, 250, 252, 0.9), rgba(255, 255, 255, 0.8));
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 16px;
+        padding: 14px 18px;
+        margin-bottom: 18px;
+        backdrop-filter: blur(15px);
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+      }
+      
+      /* Dark mode override for credit section */
+      body[data-theme="dark"] .credit-section {
+        background: linear-gradient(135deg, rgba(100, 181, 246, 0.1), rgba(66, 165, 245, 0.05));
+        border: 1px solid rgba(100, 181, 246, 0.2);
+        box-shadow: 0 4px 20px rgba(100, 181, 246, 0.2);
+      }
+      
+      .credit-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(100, 181, 246, 0.2);
+      }
+      
+      .credit-text {
+        color: var(--text-secondary);
+        margin: 0;
+        font-size: 13px;
+        font-weight: 400;
+      }
+      
+      /* Dark mode overrides for credit text */
+      body[data-theme="dark"] .credit-text {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .credit-name {
+        color: #64b5f6;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      
+      .credit-name:hover {
+        color: #42a5f5;
+        text-shadow: 0 0 8px rgba(100, 181, 246, 0.5);
+      }
+      
+      /* Status Indicators */
+      .status-online {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #4caf50;
+        border-radius: 50%;
+        margin-right: 8px;
+        animation: pulse-green 2s infinite;
+      }
+      
+      @keyframes pulse-green {
+        0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+      }
+      
+      /* Enhanced Interactive Elements */
+      .interactive-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .interactive-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s;
+      }
+      
+      .interactive-card:hover::before {
+        left: 100%;
+      }
+      
+      /* Floating Action Button Style */
+      .fab-style {
+        position: relative;
+        overflow: hidden;
+        transform-style: preserve-3d;
+      }
+      
+      .fab-style::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+        transition: all 0.3s ease;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+      }
+      
+      .fab-style:hover::after {
+        width: 200px;
+        height: 200px;
+      }
+      
+      /* Enhanced Weather Card */
+      .weather-card {
+        background: linear-gradient(135deg, rgba(248, 250, 252, 0.9), rgba(255, 255, 255, 0.8));
+        backdrop-filter: blur(25px);
+        border-radius: 24px;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        padding: 28px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+      }
+      
+      /* Dark mode override for weather card */
+      body[data-theme="dark"] .weather-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      }
+      
+      .weather-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 25px 60px rgba(59, 130, 246, 0.25);
+      }
+      
+      /* Dark mode override for weather card hover */
+      body[data-theme="dark"] .weather-card:hover {
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      }
+      
+      /* Neon Glow Effect */
+      .neon-glow {
+        text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        animation: neonPulse 2s ease-in-out infinite alternate;
+      }
+      
+      @keyframes neonPulse {
+        from { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; }
+        to { text-shadow: 0 0 2px currentColor, 0 0 5px currentColor, 0 0 8px currentColor; }
       }
 
-      /* Forecast CSS */
-      .forecast-part {
-        margin-top: 20px;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 7px;
-        color: white;
-      }
-      .forecast-part h3 {
-        margin-top: 0;
-        font-size: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding-bottom: 5px;
-      }
-      .forecast-container {
-        display: flex;
-        overflow-x: auto;
-        padding-bottom: 5px;
-        gap: 15px;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255,255,255,0.2) transparent;
-      }
-      .forecast-container::-webkit-scrollbar {
-        height: 5px;
-      }
-      .forecast-container::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      .forecast-container::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.2);
-        border-radius: 10px;
-      }
+      /* Enhanced 5-Day Forecast Styling */
       .day-forecast {
         flex: 0 0 auto;
         text-align: center;
-        padding: 5px;
-        min-width: 70px;
+        padding: 12px 8px;
+        min-width: 75px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
       }
+      
+      .day-forecast::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s;
+      }
+      
+      .day-forecast:hover::before {
+        left: 100%;
+      }
+      
+      .day-forecast:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+      
       .day-forecast img {
-        width: 35px;
-        height: 35px;
-        margin: 5px 0;
+        width: 40px;
+        height: 40px;
+        margin: 8px 0;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+        transition: transform 0.3s ease;
       }
+      
+      .day-forecast:hover img {
+        transform: scale(1.1);
+      }
+      
       .day-forecast .day-name {
         font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 0;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: var(--text-primary);
       }
+      
       .day-forecast .temp-high-low {
         font-size: 12px;
-        color: #aaa;
-        margin-top: 2px;
+        color: var(--text-secondary);
+        margin-top: 4px;
+        font-weight: 500;
+      }
+      
+      /* Dark mode overrides for day forecast inline styles */
+      body[data-theme="dark"] .day-forecast .day-name {
+        color: rgba(255, 255, 255, 0.9) !important;
+      }
+      
+      body[data-theme="dark"] .day-forecast .temp-high-low {
+        color: rgba(255, 255, 255, 0.7) !important;
       }
 
-      /* Sunrise & Sunset CSS */
+      /* Sunrise & Sunset Styling */
       .column.sunrise, .column.sunset {
         display: flex;
         align-items: center;
         gap: 6px;
         flex-direction: column;
       }
-      .column.sunrise i { color: orange; }
-      .column.sunset i { color: gold; }
+      .column.sunrise i { 
+        color: #f59e0b; 
+        animation: pulseGlow 2s ease-in-out infinite alternate;
+      }
+      .column.sunset i { 
+        color: #f97316; 
+        animation: pulseGlow 2s ease-in-out infinite alternate reverse;
+      }
       .column.sunrise span, .column.sunset span {
         font-weight: bold;
+        color: var(--text-primary);
       }
       .column.sunrise p, .column.sunset p {
         margin: 0;
         font-size: 12px;
+        color: var(--text-secondary);
+      }
+      
+      /* Dark mode overrides for sunrise/sunset */
+      body[data-theme="dark"] .column.sunrise span,
+      body[data-theme="dark"] .column.sunset span {
+        color: #ffffff;
+      }
+      
+      body[data-theme="dark"] .column.sunrise p,
+      body[data-theme="dark"] .column.sunset p {
         color: #aaa;
       }
-
-      /* Clothing Suggestion CSS */
-      .clothing-suggestion {
-        margin-top: 15px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #fff;
-        background: rgba(255,255,255,0.05);
-        padding: 8px 12px;
-        border-radius: 5px;
+      
+      @keyframes pulseGlow {
+        0% { 
+          filter: brightness(1) drop-shadow(0 0 5px currentColor);
+          transform: scale(1);
+        }
+        100% { 
+          filter: brightness(1.2) drop-shadow(0 0 10px currentColor);
+          transform: scale(1.05);
+        }
+      }
+      
+      /* Premium Loading States */
+      .wrapper {
+        animation: fadeInUp 0.8s ease-out;
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* Enhanced Interactive Elements */
+      .wrapper section {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .wrapper section:hover {
+        transform: translateY(-2px);
+      }
+      
+      /* Premium Search Enhancement */
+      .search-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+        border-radius: inherit;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+      
+      .search-container:focus-within::before {
+        opacity: 1;
       }
     </style>
   </head>
@@ -132,22 +453,53 @@
     <div class="home" id="home">
       <div id="particles-js"></div>
       <div class="dark-mode">
-        <span class="dark-mode-btn">
-          <i class="bx bx-moon"></i>
-        </span>
+        <button class="dark-mode-btn" type="button" aria-label="Toggle dark mode" style="background: none; border: none; color: inherit; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center;">
+          <i class="bx bx-moon theme-icon"></i>
+        </button>
       </div>
       <center>
         <div class="wrapper">
-          <marquee style="color: #9c9388a1; margin-top: 6px" direction="left" scrollamount="3">
-            Created By <b><a style="text-decoration: none; color: aqua"> Kanishk </a></b>
-          </marquee>
-
-          <header><i class="bx bx-left-arrow-alt"></i>Weather App</header>
-
+          <!-- Enhanced App Header -->
+          <div class="app-header">
+            <h1 class="app-title">
+              <i class="bx bx-sun" style="margin-right: 8px; font-size: 28px;"></i>
+              WeatherPro
+            </h1>
+            <p class="app-subtitle">
+              <span class="status-online"></span>
+              Real-time Weather & 5-Day Forecast
+            </p>
+          </div>
+          
+          <!-- Credit Section -->
+          <div class="credit-section">
+            <p class="credit-text">
+              Crafted with ❤️ by <a href="#" class="credit-name">Kanishk</a>
+              <span style="margin: 0 8px;">•</span>
+              Enhanced UI & Responsive Design
+            </p>
+          </div>
+          
+          <header>
+            <i class="bx bx-left-arrow-alt" aria-label="Back to search"></i>
+            <span>Weather Dashboard</span>
+          </header>
           <section class="input-part">
-            <p class="info-txt"></p>
+            <p class="info-txt" role="alert" aria-live="polite"></p>
             <div class="content">
-              <input list="cities" type="text" spellcheck="false" placeholder="Select or Enter City Name" required />
+              <div class="search-container">
+                <input
+                  list="cities"
+                  type="text"
+                  spellcheck="false"
+                  placeholder="Search for any city worldwide..."
+                  required
+                  autocomplete="off"
+                  aria-label="Enter city name for weather forecast"
+                  id="cityInput"
+                />
+                <i class="bx bx-search search-icon"></i>
+              </div>
               <datalist id="cities">
                 <option value="Bangalore"></option>
                 <option value="Chennai"></option>
@@ -179,60 +531,70 @@
                 <option value="Raipur"></option>
                 <option value="Guwahati"></option>
               </datalist>
+
               <div class="separator"></div>
-              <button>Location auto-detect</button>
+              <button type="button" aria-label="Auto-detect current location" class="location-btn">
+                <i class="bx bx-current-location" style="margin-right: 10px; font-size: 18px;"></i>
+                <span>Use My Location</span>
+                <div class="btn-ripple"></div>
+              </button>
             </div>
           </section>
-
-          <!-- Alerts Section -->
-          <section class="alerts-part">
-            <div class="alerts-header">
-              <h3>Weather Alerts</h3>
-              <i class="bx bx-chevron-down" onclick="toggleAlerts()"></i>
+          
+          <section class="alerts-part weather-card">
+            <div class="alerts-header interactive-card">
+              <h3>
+                <i class="bx bx-error-circle" style="margin-right: 8px; color: #ff5722;"></i>
+                Weather Alerts
+              </h3>
+              <i class="bx bx-chevron-down" onclick="toggleAlerts()" style="transition: transform 0.3s ease;"></i>
             </div>
             <div class="alerts-content">
-              <p>No current alerts</p>
+              <p>
+                <i class="bx bx-check-circle" style="margin-right: 8px; color: #4caf50;"></i>
+                No current weather alerts for your location
+              </p>
             </div>
           </section>
-
-          <!-- Weather Section -->
-          <section class="weather-part">
-            <img src="" alt="Weather Icon" />
-            <div class="temp">
-              <span class="numb">25</span>
+          
+          <section class="weather-part weather-card">
+            <img src="" alt="Weather Icon" class="weather-icon" />
+            <div class="temp neon-glow">
+              <span class="numb">_</span>
               <span class="deg">°</span>C
             </div>
-            <div class="weather">Sunny</div>
-            <div class="location">
+            <div class="weather">_ _</div>
+            <div class="location interactive-card">
               <i class="bx bx-map"></i>
-              <span>Bangalore, IN</span>
+              <span>_, _</span>
             </div>
             <div class="bottom-details">
-              <div class="column feels">
+              <div class="column feels interactive-card fab-style">
                 <i class="bx bxs-thermometer"></i>
                 <div class="details">
                   <div class="temp">
-                    <span class="numb-2">25</span>
+                    <span class="numb-2">_</span>
                     <span class="deg">°</span>C
                   </div>
                   <p>Feels like</p>
                 </div>
               </div>
-              <div class="column humidity">
+              <div class="column humidity interactive-card fab-style">
                 <i class="bx bxs-droplet-half"></i>
                 <div class="details">
-                  <span>50%</span>
+                  <span>_</span>
                   <p>Humidity</p>
                 </div>
               </div>
-              <div class="column sunrise">
+              <!--  Sunrise & Sunset -->
+              <div class="column sunrise interactive-card fab-style">
                 <i class="bx bx-sun"></i>
                 <div class="details">
                   <span id="sunrise-time">--:--</span>
                   <p>Sunrise</p>
                 </div>
               </div>
-              <div class="column sunset">
+              <div class="column sunset interactive-card fab-style">
                 <i class="bx bx-moon"></i>
                 <div class="details">
                   <span id="sunset-time">--:--</span>
@@ -240,56 +602,159 @@
                 </div>
               </div>
             </div>
-
-            <!-- Clothing Suggestion -->
-            <div class="clothing-suggestion" id="clothing-suggestion">
-              👕 Comfortable, wear light clothes.
-            </div>
           </section>
 
-          <!-- Forecast Section -->
-          <section class="forecast-part">
-            <h3>5-Day Forecast</h3>
-            <div class="forecast-container">
-              <div class="day-forecast">
-                <p class="day-name">Mon</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:30 / L:20</p>
+          <section class="forecast-part weather-card">
+              <h3>
+                <i class="bx bx-calendar" style="margin-right: 8px; color: #64b5f6;"></i>
+                5-Day Forecast
+              </h3>
+              <div class="forecast-container">
+                  <div class="day-forecast interactive-card fab-style">
+                      <p class="day-name">Mon</p>
+                      <img src="./assets/icons/clear.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
+                  <div class="day-forecast interactive-card fab-style">
+                      <p class="day-name">Tue</p>
+                      <img src="./assets/icons/cloud.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
+                  <div class="day-forecast interactive-card fab-style">
+                      <p class="day-name">Wed</p>
+                      <img src="./assets/icons/rain.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
+                  <div class="day-forecast interactive-card fab-style">
+                      <p class="day-name">Thu</p>
+                      <img src="./assets/icons/storm.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
+                  <div class="day-forecast interactive-card fab-style">
+                      <p class="day-name">Fri</p>
+                      <img src="./assets/icons/snow.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
               </div>
-              <div class="day-forecast">
-                <p class="day-name">Tue</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:32 / L:22</p>
-              </div>
-              <div class="day-forecast">
-                <p class="day-name">Wed</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:31 / L:21</p>
-              </div>
-              <div class="day-forecast">
-                <p class="day-name">Thu</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:29 / L:19</p>
-              </div>
-              <div class="day-forecast">
-                <p class="day-name">Fri</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:28 / L:18</p>
-              </div>
-            </div>
           </section>
 
-        </div>
+          <!-- Clothing Suggestions Section -->
+          <section class="clothing-part weather-card">
+              <h3>
+                <i class="bx bx-closet" style="margin-right: 8px; color: #f59e0b;"></i>
+                Clothing Suggestions
+              </h3>
+              <div class="clothing-container">
+                  <div class="clothing-item" id="clothing-top">
+                      <div class="clothing-icon">
+                          <i class="bx bx-t-shirt"></i>
+                      </div>
+                      <div class="clothing-details">
+                          <h4>Top</h4>
+                          <p id="top-suggestion">Light shirt</p>
+                      </div>
+                  </div>
+                  
+                  <div class="clothing-item" id="clothing-bottom">
+                      <div class="clothing-icon">
+                          <i class="bx bx-shorts"></i>
+                      </div>
+                      <div class="clothing-details">
+                          <h4>Bottom</h4>
+                          <p id="bottom-suggestion">Shorts</p>
+                      </div>
+                  </div>
+                  
+                  <div class="clothing-item" id="clothing-accessories">
+                      <div class="clothing-icon">
+                          <i class="bx bx-glasses-alt"></i>
+                      </div>
+                      <div class="clothing-details">
+                          <h4>Accessories</h4>
+                          <p id="accessories-suggestion">Sunglasses</p>
+                      </div>
+                  </div>
+                  
+                  <div class="clothing-item" id="clothing-footwear">
+                      <div class="clothing-icon">
+                          <i class="bx bx-walk"></i>
+                      </div>
+                      <div class="clothing-details">
+                          <h4>Footwear</h4>
+                          <p id="footwear-suggestion">Sneakers</p>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="clothing-tip">
+                  <div class="tip-icon">
+                      <i class="bx bx-bulb"></i>
+                  </div>
+                  <p id="clothing-tip-text">Perfect weather for outdoor activities!</p>
+              </div>
+          </section>
+          </div>
       </center>
-
+      
       <script src="assets/js/script.js"></script>
       <script src="assets/js/particles.min.js"></script>
       <script src="assets/js/app.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        crossorigin="anonymous"
+      ></script>
       <script src="assets/js/security.js"></script>
-
       <script>
-        // Alerts Toggle
+        // Enhanced Dark Mode Toggle
+        let isDarkMode = localStorage.getItem('darkMode') === 'true' || false;
+        
+        function initializeTheme() {
+          const body = document.body;
+          const themeIcon = document.querySelector('.theme-icon');
+          
+          if (isDarkMode) {
+            body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('bx-moon');
+            themeIcon.classList.add('bx-sun');
+          } else {
+            body.removeAttribute('data-theme');
+            themeIcon.classList.remove('bx-sun');
+            themeIcon.classList.add('bx-moon');
+          }
+        }
+        
+        function toggleDarkMode() {
+          const body = document.body;
+          const themeIcon = document.querySelector('.theme-icon');
+          
+          isDarkMode = !isDarkMode;
+          localStorage.setItem('darkMode', isDarkMode);
+          
+          if (isDarkMode) {
+            body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('bx-moon');
+            themeIcon.classList.add('bx-sun');
+          } else {
+            body.removeAttribute('data-theme');
+            themeIcon.classList.remove('bx-sun');
+            themeIcon.classList.add('bx-moon');
+          }
+          
+          // Add ripple effect
+          const btn = document.querySelector('.dark-mode-btn');
+          btn.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            btn.style.transform = 'scale(1)';
+          }, 150);
+        }
+        
+        // Initialize theme on load
+        initializeTheme();
+        
+        // Add event listener to dark mode button
+        document.querySelector('.dark-mode-btn').addEventListener('click', toggleDarkMode);
+
+        // Weather Alerts Toggle
         function toggleAlerts() {
           const content = document.querySelector(".alerts-content");
           const icon = document.querySelector(".alerts-header i");
@@ -304,11 +769,16 @@
           }
         }
 
-        // Sunrise & Sunset Times
+        //  Sunrise & Sunset Display
         function displaySunTimes() {
           let now = new Date();
-          let sunrise = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 6, 0);
-          let sunset = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0);
+
+          // Approx fixed times (IST)
+          let sunriseHour = 6;  // 6:00 AM
+          let sunsetHour = 18;  // 6:00 PM
+
+          let sunrise = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sunriseHour, 0, 0);
+          let sunset = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sunsetHour, 0, 0);
 
           function formatTime(date) {
             let hours = date.getHours();
@@ -324,25 +794,100 @@
           document.getElementById("sunset-time").textContent = formatTime(sunset);
         }
 
+        // Call function on load
         displaySunTimes();
 
-        // Clothing Suggestion
-        function updateClothingSuggestion() {
-          const tempEl = document.querySelector(".temp .numb");
-          const suggestionEl = document.getElementById("clothing-suggestion");
-          let temp = parseFloat(tempEl.textContent);
-          if (isNaN(temp)) temp = 25;
+        // Clothing Suggestions Functionality
+        function updateClothingSuggestions(temperature, weatherCondition, humidity) {
+          const topSuggestion = document.getElementById('top-suggestion');
+          const bottomSuggestion = document.getElementById('bottom-suggestion');
+          const accessoriesSuggestion = document.getElementById('accessories-suggestion');
+          const footwearSuggestion = document.getElementById('footwear-suggestion');
+          const clothingTip = document.getElementById('clothing-tip-text');
 
-          let suggestion = "";
-          if (temp <= 10) suggestion = "🧥 Wear a jacket! It's cold outside.";
-          else if (temp <= 20) suggestion = "🧣 Light sweater recommended.";
-          else if (temp <= 30) suggestion = "👕 Comfortable, wear light clothes.";
-          else suggestion = "🌞 Stay cool and hydrated!";
-          suggestionEl.textContent = suggestion;
+          // Temperature-based suggestions
+          if (temperature <= 5) {
+            topSuggestion.textContent = 'Heavy jacket or coat';
+            bottomSuggestion.textContent = 'Thermal pants or jeans';
+            accessoriesSuggestion.textContent = 'Gloves, scarf, hat';
+            footwearSuggestion.textContent = 'Warm boots';
+            clothingTip.textContent = 'Bundle up! It\'s freezing cold outside.';
+          } else if (temperature <= 15) {
+            topSuggestion.textContent = 'Warm sweater or hoodie';
+            bottomSuggestion.textContent = 'Long pants or jeans';
+            accessoriesSuggestion.textContent = 'Light scarf or beanie';
+            footwearSuggestion.textContent = 'Closed shoes or boots';
+            clothingTip.textContent = 'Dress warmly, it\'s quite chilly today.';
+          } else if (temperature <= 25) {
+            topSuggestion.textContent = 'Light jacket or cardigan';
+            bottomSuggestion.textContent = 'Jeans or long pants';
+            accessoriesSuggestion.textContent = 'Light jacket';
+            footwearSuggestion.textContent = 'Comfortable sneakers';
+            clothingTip.textContent = 'Perfect weather for layering!';
+          } else if (temperature <= 30) {
+            topSuggestion.textContent = 'T-shirt or light shirt';
+            bottomSuggestion.textContent = 'Shorts or light pants';
+            accessoriesSuggestion.textContent = 'Sunglasses';
+            footwearSuggestion.textContent = 'Light sneakers';
+            clothingTip.textContent = 'Great weather for outdoor activities!';
+          } else {
+            topSuggestion.textContent = 'Light breathable shirt';
+            bottomSuggestion.textContent = 'Light shorts';
+            accessoriesSuggestion.textContent = 'Hat and sunglasses';
+            footwearSuggestion.textContent = 'Sandals or breathable shoes';
+            clothingTip.textContent = 'Stay cool and hydrated in this heat!';
+          }
+
+          // Weather condition modifications
+          if (weatherCondition.toLowerCase().includes('rain') || weatherCondition.toLowerCase().includes('storm')) {
+            accessoriesSuggestion.textContent = 'Umbrella or raincoat';
+            footwearSuggestion.textContent = 'Waterproof shoes';
+            clothingTip.textContent = 'Don\'t forget your umbrella - it\'s going to rain!';
+          } else if (weatherCondition.toLowerCase().includes('snow')) {
+            accessoriesSuggestion.textContent = 'Warm hat and gloves';
+            footwearSuggestion.textContent = 'Snow boots';
+            clothingTip.textContent = 'Perfect weather for building snowmen!';
+          } else if (weatherCondition.toLowerCase().includes('clear') || weatherCondition.toLowerCase().includes('sunny')) {
+            accessoriesSuggestion.textContent = 'Sunglasses and sunscreen';
+            clothingTip.textContent = 'Beautiful sunny day - enjoy the outdoors!';
+          } else if (weatherCondition.toLowerCase().includes('cloud') || weatherCondition.toLowerCase().includes('overcast')) {
+            clothingTip.textContent = 'Cloudy but pleasant weather today.';
+          }
+
+          // High humidity modifications
+          if (humidity > 70) {
+            topSuggestion.textContent = 'Breathable, moisture-wicking fabric';
+            clothingTip.textContent = 'High humidity - choose breathable fabrics!';
+          }
         }
 
-        updateClothingSuggestion();
-        setInterval(updateClothingSuggestion, 5000);
+        // Hook into the weather display to update clothing suggestions
+        // We'll need to modify the wheatherSet function or create a listener
+        // For now, we'll create a function that can be called when weather data is available
+        function onWeatherDataUpdate() {
+          // Try to get current weather data from the displayed elements
+          const tempElement = document.querySelector('.temp .numb');
+          const weatherElement = document.querySelector('.weather');
+          const humidityElement = document.querySelector('.humidity span');
+          
+          if (tempElement && weatherElement && humidityElement) {
+            const temperature = parseInt(tempElement.textContent);
+            const weatherCondition = weatherElement.textContent;
+            const humidity = parseInt(humidityElement.textContent.replace('%', ''));
+            
+            updateClothingSuggestions(temperature, weatherCondition, humidity);
+          }
+        }
+
+        // Call clothing suggestions update periodically or when weather changes
+        setInterval(() => {
+          onWeatherDataUpdate();
+        }, 2000); // Check every 2 seconds for weather data updates
+
+        // Also call it immediately in case weather data is already loaded
+        setTimeout(() => {
+          onWeatherDataUpdate();
+        }, 1000);
       </script>
     </div>
   </body>
