@@ -3,52 +3,326 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Weather Check</title>
+        <title>Weather Check - Modern Weather App</title>
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="assets/css/home.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
         <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
     </head>
     <body>
-        
-        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-            <div class="container">
-                <a href="#" class="navbar-brand">
-                    <img src="assets/icons/favicon.svg" alt="Logo" height="30" width="30" />
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                        <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
-                    </ul>
+        <!-- Dark Mode Toggle -->
+        <div class="dark-mode-toggle">
+            <i class="bx bx-moon theme-icon"></i>
+        </div>
+
+        <!-- Modern Navigation -->
+        <nav class="modern-navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="assets/icons/favicon.svg" alt="Logo" class="nav-logo" />
+                    <span class="brand-text">WeatherCheck</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="#home" class="nav-link active">
+                        <i class="bx bx-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#features" class="nav-link">
+                        <i class="bx bx-star"></i>
+                        <span>Features</span>
+                    </a>
+                    <a href="#about" class="nav-link">
+                        <i class="bx bx-info-circle"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="#contact" class="nav-link">
+                        <i class="bx bx-message-dots"></i>
+                        <span>Contact</span>
+                    </a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <i class="bx bx-menu"></i>
                 </div>
             </div>
         </nav>
 
-        <!-- Hero section -->
-        <section class="hero">
-            <video autoplay loop muted playsinline class="hero-video">
-                <source src="https://cdn.dribbble.com/userupload/14498533/file/original-62a0c5265de6f4fcadab4e87ab4ec7d5.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-            <div class="hero-content">
-                <h1>Check the weather anytime, anywhere</h1>
-                <p>Get accurate and real-time weather updates right at your fingertips.</p>
-                <a href="index.html" class="btn-get-started">Get Started</a>
+        <!-- Modern Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="hero-background">
+                <div class="weather-particles">
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                </div>
+            </div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="bx bx-cloud-snow"></i>
+                        <span>Real-time Weather Updates</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Check Weather
+                        <span class="gradient-text">Anytime, Anywhere</span>
+                    </h1>
+                    <p class="hero-description">
+                        Get accurate, real-time weather updates with beautiful visualizations. 
+                        Our modern interface provides comprehensive weather data at your fingertips.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="index.html" class="btn-primary">
+                            <i class="bx bx-play"></i>
+                            <span>Get Started</span>
+                        </a>
+                        <a href="#features" class="btn-secondary">
+                            <i class="bx bx-info-circle"></i>
+                            <span>Learn More</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">99.9%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Live Updates</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="weather-card-preview">
+                        <div class="preview-header">
+                            <i class="bx bx-location-plus"></i>
+                            <span>New York, NY</span>
+                        </div>
+                        <div class="preview-temp">
+                            <span class="temp-value">24°</span>
+                            <div class="weather-icon">
+                                <i class="bx bx-sun"></i>
+                            </div>
+                        </div>
+                        <div class="preview-desc">Partly Cloudy</div>
+                        <div class="preview-details">
+                            <div class="detail-item">
+                                <i class="bx bx-droplet"></i>
+                                <span>68%</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="bx bx-wind"></i>
+                                <span>12 mph</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- About section -->
-        <section class="about" id="about">
-            <div class="about_title">
-                <h2>About Us</h2>
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">
+                        <i class="bx bx-star"></i>
+                        Features
+                    </span>
+                    <h2 class="section-title">
+                        Everything You Need for
+                        <span class="gradient-text">Perfect Weather Tracking</span>
+                    </h2>
+                    <p class="section-description">
+                        Our comprehensive weather platform offers advanced features to keep you informed and prepared.
+                    </p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bx bx-target-lock"></i>
+                        </div>
+                        <h3>Real-time Updates</h3>
+                        <p>Get live weather data updated every minute with high accuracy from reliable sources.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bx bx-location-plus"></i>
+                        </div>
+                        <h3>Location Detection</h3>
+                        <p>Automatic location detection or search any city worldwide for instant weather information.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bx bx-calendar-week"></i>
+                        </div>
+                        <h3>7-Day Forecast</h3>
+                        <p>Plan ahead with detailed 7-day weather forecasts including temperature and conditions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bx bx-closet"></i>
+                        </div>
+                        <h3>Clothing Suggestions</h3>
+                        <p>Smart recommendations for what to wear based on current weather conditions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bx bx-mobile"></i>
+                        </div>
+                        <h3>Mobile Responsive</h3>
+                        <p>Beautiful design that works perfectly on all devices - desktop, tablet, and mobile.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bx bx-palette"></i>
+                        </div>
+                        <h3>Dark/Light Mode</h3>
+                        <p>Choose between elegant dark and light themes for comfortable viewing anytime.</p>
+                    </div>
+                </div>
             </div>
-            <div class="container">
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="about">
+            <div class="section-container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <span class="section-badge">
+                            <i class="bx bx-info-circle"></i>
+                            About Us
+                        </span>
+                        <h2 class="section-title">
+                            Building the Future of
+                            <span class="gradient-text">Weather Technology</span>
+                        </h2>
+                        <p class="about-description">
+                            We're passionate about creating beautiful, accurate, and user-friendly weather applications. 
+                            Our team combines cutting-edge technology with intuitive design to deliver the best weather 
+                            experience possible.
+                        </p>
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <i class="bx bx-check-circle"></i>
+                                <span>Reliable & Accurate Data</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="bx bx-check-circle"></i>
+                                <span>Modern UI/UX Design</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="bx bx-check-circle"></i>
+                                <span>Cross-Platform Support</span>
+                            </div>
+                        </div>
+                        <a href="#contact" class="btn-primary">
+                            <i class="bx bx-message-dots"></i>
+                            <span>Get in Touch</span>
+                        </a>
+                    </div>
+                    <div class="about-visual">
+                        <div class="about-image">
+                            <div class="weather-visualization">
+                                <div class="viz-item">
+                                    <i class="bx bx-sun"></i>
+                                    <span>Sunny</span>
+                                </div>
+                                <div class="viz-item">
+                                    <i class="bx bx-cloud"></i>
+                                    <span>Cloudy</span>
+                                </div>
+                                <div class="viz-item">
+                                    <i class="bx bx-cloud-rain"></i>
+                                    <span>Rainy</span>
+                                </div>
+                                <div class="viz-item">
+                                    <i class="bx bx-cloud-snow"></i>
+                                    <span>Snowy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">
+                        <i class="bx bx-message-dots"></i>
+                        Contact Us
+                    </span>
+                    <h2 class="section-title">
+                        Get in Touch
+                        <span class="gradient-text">We'd Love to Hear From You</span>
+                    </h2>
+                    <p class="section-description">
+                        Have questions, suggestions, or need help? Send us a message and we'll get back to you as soon as possible.
+                    </p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="bx bx-envelope"></i>
+                            </div>
+                            <h3>Email Us</h3>
+                            <p>hello@weathercheck.com</p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="bx bx-phone"></i>
+                            </div>
+                            <h3>Call Us</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="bx bx-map"></i>
+                            </div>
+                            <h3>Visit Us</h3>
+                            <p>123 Weather St, Cloud City</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <form class="modern-contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Full Name</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="bx bx-send"></i>
+                                <span>Send Message</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
                 <img
                     src="https://images.pexels.com/photos/14501713/pexels-photo-14501713.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                     alt=""
@@ -111,6 +385,126 @@
                 <p>&copy; 2024 Weather Check. All rights reserved.</p>
             </div>
         </section>
+        <!-- Footer -->
+        <footer class="modern-footer">
+            <div class="footer-container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <img src="assets/icons/favicon.svg" alt="Logo" class="footer-logo" />
+                        <span class="footer-brand-text">WeatherCheck</span>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#features">Features</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">
+                            <i class="bx bxl-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="bx bxl-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="bx bxl-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 WeatherCheck. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Mobile Navigation Toggle
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+
+            // Dark Mode Toggle
+            let isDarkMode = localStorage.getItem('darkMode') === 'true' || false;
+            
+            function initializeTheme() {
+                const body = document.body;
+                const themeIcon = document.querySelector('.theme-icon');
+                
+                if (isDarkMode) {
+                    body.setAttribute('data-theme', 'dark');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                } else {
+                    body.removeAttribute('data-theme');
+                    themeIcon.classList.remove('bx-sun');
+                    themeIcon.classList.add('bx-moon');
+                }
+            }
+            
+            function toggleDarkMode() {
+                const body = document.body;
+                const themeIcon = document.querySelector('.theme-icon');
+                
+                isDarkMode = !isDarkMode;
+                
+                if (isDarkMode) {
+                    body.setAttribute('data-theme', 'dark');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                } else {
+                    body.removeAttribute('data-theme');
+                    themeIcon.classList.remove('bx-sun');
+                    themeIcon.classList.add('bx-moon');
+                }
+                
+                localStorage.setItem('darkMode', isDarkMode);
+            }
+            
+            // Initialize theme on page load
+            initializeTheme();
+            
+            // Add click event to dark mode toggle
+            document.querySelector('.dark-mode-toggle').addEventListener('click', toggleDarkMode);
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add active class to navigation based on scroll
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
