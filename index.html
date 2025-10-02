@@ -18,7 +18,7 @@
         background: rgba(255, 0, 0, 0.1);
         color:white;
         border-radius: 5px;
-        display: block;/* Initially hidden */
+        display: block;
       }
       .alerts-header {
         display: flex;
@@ -59,13 +59,12 @@
       }
       .forecast-container {
         display: flex;
-        overflow-x: auto; /* Make it horizontally scrollable */
-        padding-bottom: 5px; /* Space for scrollbar */
-        gap: 15px; /* Space between forecast days */
-        scrollbar-width: thin; /* For Firefox */
-        scrollbar-color: rgba(255,255,255,0.2) transparent; /* For Firefox */
+        overflow-x: auto;
+        padding-bottom: 5px;
+        gap: 15px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255,255,255,0.2) transparent;
       }
-      /* For Webkit browsers (Chrome, Safari) */
       .forecast-container::-webkit-scrollbar {
           height: 5px;
       }
@@ -77,18 +76,18 @@
           border-radius: 10px;
       }
       .day-forecast {
-        flex: 0 0 auto; /* Prevent stretching, allow content to dictate width */
+        flex: 0 0 auto;
         text-align: center;
         padding: 5px;
-        min-width: 70px; /* Minimum width for each day */
-        display: flex; /* Use flex for internal layout */
+        min-width: 70px;
+        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
       }
       .day-forecast img {
         width: 35px;
-        height: 35px; /* Ensure consistent icon size */
+        height: 35px;
         margin: 5px 0;
       }
       .day-forecast .day-name {
@@ -102,6 +101,24 @@
         margin-top: 2px;
       }
       /* END: New CSS for 5-Day Forecast */
+
+      /* Sunrise & Sunset Styling */
+      .column.sunrise, .column.sunset {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-direction: column;
+      }
+      .column.sunrise i { color: orange; }
+      .column.sunset i { color: gold; }
+      .column.sunrise span, .column.sunset span {
+        font-weight: bold;
+      }
+      .column.sunrise p, .column.sunset p {
+        margin: 0;
+        font-size: 12px;
+        color: #aaa;
+      }
     </style>
   </head>
   <body>
@@ -209,6 +226,21 @@
                   <p>Humidity</p>
                 </div>
               </div>
+              <!--  Sunrise & Sunset -->
+              <div class="column sunrise">
+                <i class="bx bx-sun"></i>
+                <div class="details">
+                  <span id="sunrise-time">--:--</span>
+                  <p>Sunrise</p>
+                </div>
+              </div>
+              <div class="column sunset">
+                <i class="bx bx-moon"></i>
+                <div class="details">
+                  <span id="sunset-time">--:--</span>
+                  <p>Sunset</p>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -250,13 +282,11 @@
       <script src="assets/js/app.js"></script>
       <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous"
-        referrerpolicy="no-referrer"
       ></script>
       <script src="assets/js/security.js"></script>
       <script>
-        // Inline JavaScript for Weather Alerts Toggle
+        // Weather Alerts Toggle
         function toggleAlerts() {
           const content = document.querySelector(".alerts-content");
           const icon = document.querySelector(".alerts-header i");
@@ -270,6 +300,34 @@
             icon.classList.add("bx-chevron-up");
           }
         }
+
+        //  Sunrise & Sunset Display
+        function displaySunTimes() {
+          let now = new Date();
+
+          // Approx fixed times (IST)
+          let sunriseHour = 6;  // 6:00 AM
+          let sunsetHour = 18;  // 6:00 PM
+
+          let sunrise = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sunriseHour, 0, 0);
+          let sunset = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sunsetHour, 0, 0);
+
+          function formatTime(date) {
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let ampm = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            return hours + ":" + minutes + " " + ampm;
+          }
+
+          document.getElementById("sunrise-time").textContent = formatTime(sunrise);
+          document.getElementById("sunset-time").textContent = formatTime(sunset);
+        }
+
+        // Call function on load
+        displaySunTimes();
       </script>
     </div>
   </body>
