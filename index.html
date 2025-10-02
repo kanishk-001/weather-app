@@ -42,18 +42,76 @@
         font-size: 20px;
         color:white;
       }
+
+      /* START: New CSS for 5-Day Forecast */
+      .forecast-part {
+        margin-top: 20px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 7px;
+        color: white;
+      }
+      .forecast-part h3 {
+        margin-top: 0;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 5px;
+      }
+      .forecast-container {
+        display: flex;
+        overflow-x: auto; /* Make it horizontally scrollable */
+        padding-bottom: 5px; /* Space for scrollbar */
+        gap: 15px; /* Space between forecast days */
+        scrollbar-width: thin; /* For Firefox */
+        scrollbar-color: rgba(255,255,255,0.2) transparent; /* For Firefox */
+      }
+      /* For Webkit browsers (Chrome, Safari) */
+      .forecast-container::-webkit-scrollbar {
+          height: 5px;
+      }
+      .forecast-container::-webkit-scrollbar-track {
+          background: transparent;
+      }
+      .forecast-container::-webkit-scrollbar-thumb {
+          background: rgba(255,255,255,0.2);
+          border-radius: 10px;
+      }
+      .day-forecast {
+        flex: 0 0 auto; /* Prevent stretching, allow content to dictate width */
+        text-align: center;
+        padding: 5px;
+        min-width: 70px; /* Minimum width for each day */
+        display: flex; /* Use flex for internal layout */
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .day-forecast img {
+        width: 35px;
+        height: 35px; /* Ensure consistent icon size */
+        margin: 5px 0;
+      }
+      .day-forecast .day-name {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 0;
+      }
+      .day-forecast .temp-high-low {
+        font-size: 12px;
+        color: #aaa;
+        margin-top: 2px;
+      }
+      /* END: New CSS for 5-Day Forecast */
     </style>
   </head>
   <body>
     <div class="home" id="home">
       <div id="particles-js"></div>
-      <!-- dark mode toggle -->
       <div class="dark-mode">
         <span class="dark-mode-btn">
           <i class="bx bx-moon"></i>
         </span>
       </div>
-      <!-- main content -->
       <center>
         <div class="wrapper">
           <marquee
@@ -112,7 +170,6 @@
             </div>
           </section>
           
-          <!-- Weather Alerts Section -->
           <section class="alerts-part">
             <div class="alerts-header">
               <h3>Weather Alerts</h3>
@@ -154,7 +211,38 @@
               </div>
             </div>
           </section>
-        </div>
+
+          <section class="forecast-part">
+              <h3>5-Day Forecast</h3>
+              <div class="forecast-container">
+                  <div class="day-forecast">
+                      <p class="day-name">Mon</p>
+                      <img src="./assets/icons/default.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
+                  <div class="day-forecast">
+                      <p class="day-name">Tue</p>
+                      <img src="./assets/icons/default.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
+                  <div class="day-forecast">
+                      <p class="day-name">Wed</p>
+                      <img src="./assets/icons/default.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
+                  <div class="day-forecast">
+                      <p class="day-name">Thu</p>
+                      <img src="./assets/icons/default.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
+                  <div class="day-forecast">
+                      <p class="day-name">Fri</p>
+                      <img src="./assets/icons/default.svg" alt="Icon" />
+                      <p class="temp-high-low">H:_ / L:_</p>
+                  </div>
+              </div>
+          </section>
+          </div>
       </center>
       
       <script src="assets/js/script.js"></script>
