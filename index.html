@@ -4,14 +4,11 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="weatherapp.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
     <title>Weather Web App</title>
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
     <style>
-      /* Inline CSS for Weather Alerts */
+      /* Alerts CSS */
       .alerts-part {
         margin-top: 20px;
         padding: 10px 15px;
@@ -43,7 +40,7 @@
         color:white;
       }
 
-      /* START: New CSS for 5-Day Forecast */
+      /* Forecast CSS */
       .forecast-part {
         margin-top: 20px;
         padding: 10px;
@@ -66,14 +63,14 @@
         scrollbar-color: rgba(255,255,255,0.2) transparent;
       }
       .forecast-container::-webkit-scrollbar {
-          height: 5px;
+        height: 5px;
       }
       .forecast-container::-webkit-scrollbar-track {
-          background: transparent;
+        background: transparent;
       }
       .forecast-container::-webkit-scrollbar-thumb {
-          background: rgba(255,255,255,0.2);
-          border-radius: 10px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 10px;
       }
       .day-forecast {
         flex: 0 0 auto;
@@ -100,9 +97,8 @@
         color: #aaa;
         margin-top: 2px;
       }
-      /* END: New CSS for 5-Day Forecast */
 
-      /* Sunrise & Sunset Styling */
+      /* Sunrise & Sunset CSS */
       .column.sunrise, .column.sunset {
         display: flex;
         align-items: center;
@@ -119,6 +115,17 @@
         font-size: 12px;
         color: #aaa;
       }
+
+      /* Clothing Suggestion CSS */
+      .clothing-suggestion {
+        margin-top: 15px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        background: rgba(255,255,255,0.05);
+        padding: 8px 12px;
+        border-radius: 5px;
+      }
     </style>
   </head>
   <body>
@@ -131,25 +138,16 @@
       </div>
       <center>
         <div class="wrapper">
-          <marquee
-            style="color: #9c9388a1; margin-top: 6px"
-            direction="left"
-            scrollamount="3"
-            >Created By
-            <b><a style="text-decoration: none; color: aqua"> Kanishk </a> </b
-            ><span id="contactspan"></span>
+          <marquee style="color: #9c9388a1; margin-top: 6px" direction="left" scrollamount="3">
+            Created By <b><a style="text-decoration: none; color: aqua"> Kanishk </a></b>
           </marquee>
+
           <header><i class="bx bx-left-arrow-alt"></i>Weather App</header>
+
           <section class="input-part">
             <p class="info-txt"></p>
             <div class="content">
-              <input
-                list="cities"
-                type="text"
-                spellcheck="false"
-                placeholder="Select or Enter City Name"
-                required
-              />
+              <input list="cities" type="text" spellcheck="false" placeholder="Select or Enter City Name" required />
               <datalist id="cities">
                 <option value="Bangalore"></option>
                 <option value="Chennai"></option>
@@ -181,12 +179,12 @@
                 <option value="Raipur"></option>
                 <option value="Guwahati"></option>
               </datalist>
-
               <div class="separator"></div>
               <button>Location auto-detect</button>
             </div>
           </section>
-          
+
+          <!-- Alerts Section -->
           <section class="alerts-part">
             <div class="alerts-header">
               <h3>Weather Alerts</h3>
@@ -196,24 +194,25 @@
               <p>No current alerts</p>
             </div>
           </section>
-          
+
+          <!-- Weather Section -->
           <section class="weather-part">
             <img src="" alt="Weather Icon" />
             <div class="temp">
-              <span class="numb">_</span>
+              <span class="numb">25</span>
               <span class="deg">°</span>C
             </div>
-            <div class="weather">_ _</div>
+            <div class="weather">Sunny</div>
             <div class="location">
               <i class="bx bx-map"></i>
-              <span>_, _</span>
+              <span>Bangalore, IN</span>
             </div>
             <div class="bottom-details">
               <div class="column feels">
                 <i class="bx bxs-thermometer"></i>
                 <div class="details">
                   <div class="temp">
-                    <span class="numb-2">_</span>
+                    <span class="numb-2">25</span>
                     <span class="deg">°</span>C
                   </div>
                   <p>Feels like</p>
@@ -222,11 +221,10 @@
               <div class="column humidity">
                 <i class="bx bxs-droplet-half"></i>
                 <div class="details">
-                  <span>_</span>
+                  <span>50%</span>
                   <p>Humidity</p>
                 </div>
               </div>
-              <!--  Sunrise & Sunset -->
               <div class="column sunrise">
                 <i class="bx bx-sun"></i>
                 <div class="details">
@@ -242,51 +240,56 @@
                 </div>
               </div>
             </div>
+
+            <!-- Clothing Suggestion -->
+            <div class="clothing-suggestion" id="clothing-suggestion">
+              👕 Comfortable, wear light clothes.
+            </div>
           </section>
 
+          <!-- Forecast Section -->
           <section class="forecast-part">
-              <h3>5-Day Forecast</h3>
-              <div class="forecast-container">
-                  <div class="day-forecast">
-                      <p class="day-name">Mon</p>
-                      <img src="./assets/icons/default.svg" alt="Icon" />
-                      <p class="temp-high-low">H:_ / L:_</p>
-                  </div>
-                  <div class="day-forecast">
-                      <p class="day-name">Tue</p>
-                      <img src="./assets/icons/default.svg" alt="Icon" />
-                      <p class="temp-high-low">H:_ / L:_</p>
-                  </div>
-                  <div class="day-forecast">
-                      <p class="day-name">Wed</p>
-                      <img src="./assets/icons/default.svg" alt="Icon" />
-                      <p class="temp-high-low">H:_ / L:_</p>
-                  </div>
-                  <div class="day-forecast">
-                      <p class="day-name">Thu</p>
-                      <img src="./assets/icons/default.svg" alt="Icon" />
-                      <p class="temp-high-low">H:_ / L:_</p>
-                  </div>
-                  <div class="day-forecast">
-                      <p class="day-name">Fri</p>
-                      <img src="./assets/icons/default.svg" alt="Icon" />
-                      <p class="temp-high-low">H:_ / L:_</p>
-                  </div>
+            <h3>5-Day Forecast</h3>
+            <div class="forecast-container">
+              <div class="day-forecast">
+                <p class="day-name">Mon</p>
+                <img src="./assets/icons/default.svg" alt="Icon" />
+                <p class="temp-high-low">H:30 / L:20</p>
               </div>
+              <div class="day-forecast">
+                <p class="day-name">Tue</p>
+                <img src="./assets/icons/default.svg" alt="Icon" />
+                <p class="temp-high-low">H:32 / L:22</p>
+              </div>
+              <div class="day-forecast">
+                <p class="day-name">Wed</p>
+                <img src="./assets/icons/default.svg" alt="Icon" />
+                <p class="temp-high-low">H:31 / L:21</p>
+              </div>
+              <div class="day-forecast">
+                <p class="day-name">Thu</p>
+                <img src="./assets/icons/default.svg" alt="Icon" />
+                <p class="temp-high-low">H:29 / L:19</p>
+              </div>
+              <div class="day-forecast">
+                <p class="day-name">Fri</p>
+                <img src="./assets/icons/default.svg" alt="Icon" />
+                <p class="temp-high-low">H:28 / L:18</p>
+              </div>
+            </div>
           </section>
-          </div>
+
+        </div>
       </center>
-      
+
       <script src="assets/js/script.js"></script>
       <script src="assets/js/particles.min.js"></script>
       <script src="assets/js/app.js"></script>
-      <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        crossorigin="anonymous"
-      ></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script src="assets/js/security.js"></script>
+
       <script>
-        // Weather Alerts Toggle
+        // Alerts Toggle
         function toggleAlerts() {
           const content = document.querySelector(".alerts-content");
           const icon = document.querySelector(".alerts-header i");
@@ -301,16 +304,11 @@
           }
         }
 
-        //  Sunrise & Sunset Display
+        // Sunrise & Sunset Times
         function displaySunTimes() {
           let now = new Date();
-
-          // Approx fixed times (IST)
-          let sunriseHour = 6;  // 6:00 AM
-          let sunsetHour = 18;  // 6:00 PM
-
-          let sunrise = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sunriseHour, 0, 0);
-          let sunset = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sunsetHour, 0, 0);
+          let sunrise = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 6, 0);
+          let sunset = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0);
 
           function formatTime(date) {
             let hours = date.getHours();
@@ -326,8 +324,25 @@
           document.getElementById("sunset-time").textContent = formatTime(sunset);
         }
 
-        // Call function on load
         displaySunTimes();
+
+        // Clothing Suggestion
+        function updateClothingSuggestion() {
+          const tempEl = document.querySelector(".temp .numb");
+          const suggestionEl = document.getElementById("clothing-suggestion");
+          let temp = parseFloat(tempEl.textContent);
+          if (isNaN(temp)) temp = 25;
+
+          let suggestion = "";
+          if (temp <= 10) suggestion = "🧥 Wear a jacket! It's cold outside.";
+          else if (temp <= 20) suggestion = "🧣 Light sweater recommended.";
+          else if (temp <= 30) suggestion = "👕 Comfortable, wear light clothes.";
+          else suggestion = "🌞 Stay cool and hydrated!";
+          suggestionEl.textContent = suggestion;
+        }
+
+        updateClothingSuggestion();
+        setInterval(updateClothingSuggestion, 5000);
       </script>
     </div>
   </body>
