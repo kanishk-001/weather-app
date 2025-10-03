@@ -249,8 +249,16 @@
 
           <!-- Forecast Section -->
           <section class="forecast-part">
-            <h3>5-Day Forecast</h3>
-            <div class="forecast-container">
+            <div class="forecast-header">
+              <h3>5-Day Forecast</h3>
+              <div class="forecast-toggle">
+                <button class="toggle-btn active" onclick="toggleForecastView('daily')">Daily</button>
+                <button class="toggle-btn" onclick="toggleForecastView('hourly')">Hourly</button>
+              </div>
+            </div>
+            
+            <!-- Daily Forecast -->
+            <div class="forecast-container daily-forecast" id="daily-forecast">
               <div class="day-forecast">
                 <p class="day-name">Mon</p>
                 <img src="./assets/icons/default.svg" alt="Icon" />
@@ -275,6 +283,13 @@
                 <p class="day-name">Fri</p>
                 <img src="./assets/icons/default.svg" alt="Icon" />
                 <p class="temp-high-low">H:28 / L:18</p>
+              </div>
+            </div>
+
+            <!-- Hourly Forecast -->
+            <div class="forecast-container hourly-forecast" id="hourly-forecast" style="display: none;">
+              <div class="hourly-scroll">
+                <!-- Hourly forecast items will be populated by JavaScript -->
               </div>
             </div>
           </section>
@@ -343,6 +358,171 @@
 
         updateClothingSuggestion();
         setInterval(updateClothingSuggestion, 5000);
+
+        // Hourly Forecast Functions
+        function toggleForecastView(view) {
+          const dailyForecast = document.getElementById('daily-forecast');
+          const hourlyForecast = document.getElementById('hourly-forecast');
+          const toggleBtns = document.querySelectorAll('.toggle-btn');
+          
+          // Update button states
+          toggleBtns.forEach(btn => btn.classList.remove('active'));
+          event.target.classList.add('active');
+          
+          if (view === 'daily') {
+            dailyForecast.style.display = 'flex';
+            hourlyForecast.style.display = 'none';
+          } else {
+            dailyForecast.style.display = 'none';
+            hourlyForecast.style.display = 'block';
+            // Load hourly forecast if not already loaded
+            if (hourlyForecast.querySelector('.hour-forecast') === null) {
+              loadHourlyForecast();
+            }
+          }
+        }
+
+        function loadHourlyForecast() {
+          const currentCity = document.querySelector('.location span').textContent.split(',')[0];
+          if (currentCity) {
+            getHourlyForecastData(currentCity);
+          }
+        }
+
+        function getHourlyForecastData(city) {
+          const apiKey = 'b190a0605344cc4f3af08d0dd473dd25';
+          const api = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+          
+          // Show loading state
+          const hourlyScroll = document.querySelector('.hourly-scroll');
+          hourlyScroll.innerHTML = '<div style="text-align: center; padding: 20px; color: #ccc;">Loading hourly forecast...</div>';
+          
+          fetch(api)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then(result => {
+              if (result.cod === '200') {
+                displayHourlyForecast(result);
+              } else {
+                throw new Error(result.message || 'Failed to fetch forecast data');
+              }
+            })
+            .catch(error => {
+              console.error('Error fetching hourly forecast:', error);
+              hourlyScroll.innerHTML = '<div style="text-align: center; padding: 20px; color: #ff6b6b;">Failed to load hourly forecast. Please try again.</div>';
+            });
+        }
+
+        function displayHourlyForecast(weather) {
+          const hourlyScroll = document.querySelector('.hourly-scroll');
+          hourlyScroll.innerHTML = ''; // Clear previous forecast
+
+          // Get next 24 hours of forecast (3-hour intervals for 8 periods = 24 hours)
+          const hourlyData = weather.list.slice(0, 8);
+          
+          hourlyData.forEach((forecast, index) => {
+            const date = new Date(forecast.dt * 1000);
+            const now = new Date();
+            const isCurrentHour = Math.abs(date.getTime() - now.getTime()) < 3600000; // Within 1 hour
+            
+            const time = date.toLocaleTimeString('en-US', { 
+              hour: 'numeric', 
+              hour12: true 
+            });
+            const temp = Math.round(forecast.main.temp);
+            const icon = forecast.weather[0].icon;
+            const description = forecast.weather[0].description;
+            const humidity = forecast.main.humidity;
+            const windSpeed = forecast.wind.speed;
+
+            const hourItem = document.createElement('div');
+            hourItem.className = `hour-forecast ${isCurrentHour ? 'current-hour' : ''}`;
+            hourItem.innerHTML = `
+              <div class="time">${time} ${isCurrentHour ? '(Now)' : ''}</div>
+              <img src="http://openweathermap.org/img/wn/${icon}.png" alt="weather icon">
+              <div class="temp">${temp}°C</div>
+              <div class="description">${description}</div>
+            `;
+
+            // Add click event for more details
+            hourItem.addEventListener('click', () => {
+              showHourlyDetails(forecast, time);
+            });
+
+            hourlyScroll.appendChild(hourItem);
+          });
+        }
+
+        function showHourlyDetails(forecast, time) {
+          // Create modal overlay
+          const modal = document.createElement('div');
+          modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+          `;
+          
+          const modalContent = document.createElement('div');
+          modalContent.style.cssText = `
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            text-align: center;
+            max-width: 300px;
+            width: 90%;
+            cursor: default;
+          `;
+          
+          modalContent.innerHTML = `
+            <h3 style="margin-top: 0; color: #fff;">Hourly Forecast Details</h3>
+            <div style="margin: 20px 0;">
+              <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png" alt="weather icon" style="width: 60px; height: 60px;">
+            </div>
+            <div style="text-align: left; line-height: 1.6;">
+              <p><strong>Time:</strong> ${time}</p>
+              <p><strong>Temperature:</strong> ${Math.round(forecast.main.temp)}°C</p>
+              <p><strong>Feels like:</strong> ${Math.round(forecast.main.feels_like)}°C</p>
+              <p><strong>Humidity:</strong> ${forecast.main.humidity}%</p>
+              <p><strong>Wind Speed:</strong> ${forecast.wind.speed} m/s</p>
+              <p><strong>Pressure:</strong> ${forecast.main.pressure} hPa</p>
+              <p><strong>Description:</strong> ${forecast.weather[0].description}</p>
+            </div>
+            <button onclick="this.closest('.modal-overlay').remove()" style="
+              background: rgba(255, 255, 255, 0.2);
+              border: 1px solid rgba(255, 255, 255, 0.3);
+              color: white;
+              padding: 10px 20px;
+              border-radius: 5px;
+              cursor: pointer;
+              margin-top: 15px;
+            ">Close</button>
+          `;
+          
+          modal.className = 'modal-overlay';
+          modal.appendChild(modalContent);
+          document.body.appendChild(modal);
+          
+          // Close modal when clicking outside
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.remove();
+            }
+          });
+        }
       </script>
     </div>
   </body>
