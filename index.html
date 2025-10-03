@@ -1,349 +1,728 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="weatherapp.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
-    <title>Weather Web App</title>
-    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
     <style>
-      /* Alerts CSS */
-      .alerts-part {
-        margin-top: 20px;
-        padding: 10px 15px;
-        background: rgba(255, 0, 0, 0.1);
-        color:white;
-        border-radius: 5px;
-        display: block;
-      }
-      .alerts-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-      }
-      .alerts-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 10px 0;
-      }
-      .alerts-content p {
-        font-size: 14px;
-        margin: 0;
-        padding: 0 10px;
-      }
-      .alerts-header i {
-        font-size: 20px;
-        color:white;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      /* Forecast CSS */
-      .forecast-part {
-        margin-top: 20px;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 7px;
-        color: white;
-      }
-      .forecast-part h3 {
-        margin-top: 0;
-        font-size: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding-bottom: 5px;
-      }
-      .forecast-container {
-        display: flex;
-        overflow-x: auto;
-        padding-bottom: 5px;
-        gap: 15px;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255,255,255,0.2) transparent;
-      }
-      .forecast-container::-webkit-scrollbar {
-        height: 5px;
-      }
-      .forecast-container::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      .forecast-container::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.2);
-        border-radius: 10px;
-      }
-      .day-forecast {
-        flex: 0 0 auto;
-        text-align: center;
-        padding: 5px;
-        min-width: 70px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .day-forecast img {
-        width: 35px;
-        height: 35px;
-        margin: 5px 0;
-      }
-      .day-forecast .day-name {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 0;
-      }
-      .day-forecast .temp-high-low {
-        font-size: 12px;
-        color: #aaa;
-        margin-top: 2px;
-      }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: #0A2463;
+            color: #fff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-      /* Sunrise & Sunset CSS */
-      .column.sunrise, .column.sunset {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        flex-direction: column;
-      }
-      .column.sunrise i { color: orange; }
-      .column.sunset i { color: gold; }
-      .column.sunrise span, .column.sunset span {
-        font-weight: bold;
-      }
-      .column.sunrise p, .column.sunset p {
-        margin: 0;
-        font-size: 12px;
-        color: #aaa;
-      }
+        .container {
+            max-width: 428px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: #0A2463;
+            position: relative;
+        }
 
-      /* Clothing Suggestion CSS */
-      .clothing-suggestion {
-        margin-top: 15px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #fff;
-        background: rgba(255,255,255,0.05);
-        padding: 8px 12px;
-        border-radius: 5px;
-      }
+        /* Header */
+        .header {
+            padding: 60px 20px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .location-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 17px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .location-button:active {
+            transform: scale(0.96);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-bar {
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 44px 14px 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 17px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 20px;
+        }
+
+        /* Main Weather Display */
+        .main-weather {
+            padding: 40px 20px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .city-name {
+            font-size: 34px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .temperature {
+            font-size: 96px;
+            font-weight: 200;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin: 20px 0;
+        }
+
+        .condition {
+            font-size: 22px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+        }
+
+        .temp-range {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .weather-icon {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Hourly Forecast */
+        .hourly-section {
+            padding: 0 20px;
+            margin: 30px 0;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .hourly-container {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 16px;
+            backdrop-filter: blur(40px);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .hourly-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hourly-scroll {
+            display: flex;
+            gap: 24px;
+            min-width: min-content;
+        }
+
+        .hour-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            min-width: 60px;
+        }
+
+        .hour-time {
+            font-size: 15px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hour-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .hour-temp {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        /* Daily Forecast */
+        .daily-section {
+            padding: 0 20px;
+            margin: 30px 0;
+        }
+
+        .daily-container {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 12px;
+            backdrop-filter: blur(40px);
+        }
+
+        .day-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 8px;
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.2s;
+        }
+
+        .day-item:last-child {
+            border-bottom: none;
+        }
+
+        .day-item:active {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .day-name {
+            flex: 1;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .day-icon {
+            width: 32px;
+            height: 32px;
+            margin: 0 16px;
+        }
+
+        .day-temps {
+            display: flex;
+            gap: 8px;
+            font-size: 17px;
+            min-width: 80px;
+            justify-content: flex-end;
+        }
+
+        .temp-low {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Detail Cards */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 20px;
+            margin: 30px 0;
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 16px;
+            backdrop-filter: blur(40px);
+            transition: all 0.3s;
+        }
+
+        .detail-card:active {
+            transform: scale(0.98);
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .detail-value {
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .detail-description {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Alert Banner */
+        .alert-banner {
+            margin: 20px;
+            background: rgba(255, 149, 0, 0.2);
+            border: 1px solid rgba(255, 149, 0, 0.4);
+            border-radius: 16px;
+            padding: 16px;
+            backdrop-filter: blur(40px);
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .alert-banner:active {
+            transform: scale(0.98);
+        }
+
+        .alert-icon {
+            color: #FF9500;
+            font-size: 24px;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .alert-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Clothing Suggestion */
+        .suggestion-card {
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(40px);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .suggestion-icon {
+            font-size: 36px;
+        }
+
+        .suggestion-text {
+            font-size: 15px;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.9);
+        }
+
+        /* Info Text */
+        .info-text {
+            text-align: center;
+            padding: 12px 20px;
+            margin: 0 20px 20px;
+            background: rgba(255, 59, 48, 0.2);
+            border: 1px solid rgba(255, 59, 48, 0.4);
+            border-radius: 12px;
+            font-size: 15px;
+            display: none;
+        }
+
+        .info-text.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
     </style>
-  </head>
-  <body>
-    <div class="home" id="home">
-      <div id="particles-js"></div>
-      <div class="dark-mode">
-        <span class="dark-mode-btn">
-          <i class="bx bx-moon"></i>
-        </span>
-      </div>
-      <center>
-        <div class="wrapper">
-          <marquee style="color: #9c9388a1; margin-top: 6px" direction="left" scrollamount="3">
-            Created By <b><a style="text-decoration: none; color: aqua"> Kanishk </a></b>
-          </marquee>
+</head>
+<body>
+    <div class="container">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="bx bx-moon"></i>
+        </button>
 
-          <header><i class="bx bx-left-arrow-alt"></i>Weather App</header>
-
-          <section class="input-part">
-            <p class="info-txt"></p>
-            <div class="content">
-              <input list="cities" type="text" spellcheck="false" placeholder="Select or Enter City Name" required />
-              <datalist id="cities">
-                <option value="Bangalore"></option>
-                <option value="Chennai"></option>
-                <option value="Delhi"></option>
-                <option value="Lucknow"></option>
-                <option value="Mumbai"></option>
-                <option value="Noida"></option>
-                <option value="Hyderabad"></option>
-                <option value="Kolkata"></option>
-                <option value="Pune"></option>
-                <option value="Jaipur"></option>
-                <option value="Ahmedabad"></option>
-                <option value="Chandigarh"></option>
-                <option value="Gurgaon"></option>
-                <option value="Nagpur"></option>
-                <option value="Bhopal"></option>
-                <option value="Patna"></option>
-                <option value="Indore"></option>
-                <option value="Kanpur"></option>
-                <option value="Coimbatore"></option>
-                <option value="Vijayawada"></option>
-                <option value="Surat"></option>
-                <option value="Visakhapatnam"></option>
-                <option value="Madurai"></option>
-                <option value="Thiruvananthapuram"></option>
-                <option value="Mysore"></option>
-                <option value="Varanasi"></option>
-                <option value="Ranchi"></option>
-                <option value="Raipur"></option>
-                <option value="Guwahati"></option>
-              </datalist>
-              <div class="separator"></div>
-              <button>Location auto-detect</button>
+        <div class="header">
+            <button class="location-button" onclick="detectLocation()">
+                <i class="bx bx-current-location"></i>
+                <span>Current Location</span>
+            </button>
+            <div class="search-bar">
+                <i class="bx bx-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search for a city" 
+                       list="cities" onchange="searchCity(this.value)">
+                <datalist id="cities">
+                    <option value="Bangalore">
+                    <option value="Chennai">
+                    <option value="Delhi">
+                    <option value="Mumbai">
+                    <option value="Kolkata">
+                    <option value="Hyderabad">
+                </datalist>
             </div>
-          </section>
-
-          <!-- Alerts Section -->
-          <section class="alerts-part">
-            <div class="alerts-header">
-              <h3>Weather Alerts</h3>
-              <i class="bx bx-chevron-down" onclick="toggleAlerts()"></i>
-            </div>
-            <div class="alerts-content">
-              <p>No current alerts</p>
-            </div>
-          </section>
-
-          <!-- Weather Section -->
-          <section class="weather-part">
-            <img src="" alt="Weather Icon" />
-            <div class="temp">
-              <span class="numb">25</span>
-              <span class="deg">°</span>C
-            </div>
-            <div class="weather">Sunny</div>
-            <div class="location">
-              <i class="bx bx-map"></i>
-              <span>Bangalore, IN</span>
-            </div>
-            <div class="bottom-details">
-              <div class="column feels">
-                <i class="bx bxs-thermometer"></i>
-                <div class="details">
-                  <div class="temp">
-                    <span class="numb-2">25</span>
-                    <span class="deg">°</span>C
-                  </div>
-                  <p>Feels like</p>
-                </div>
-              </div>
-              <div class="column humidity">
-                <i class="bx bxs-droplet-half"></i>
-                <div class="details">
-                  <span>50%</span>
-                  <p>Humidity</p>
-                </div>
-              </div>
-              <div class="column sunrise">
-                <i class="bx bx-sun"></i>
-                <div class="details">
-                  <span id="sunrise-time">--:--</span>
-                  <p>Sunrise</p>
-                </div>
-              </div>
-              <div class="column sunset">
-                <i class="bx bx-moon"></i>
-                <div class="details">
-                  <span id="sunset-time">--:--</span>
-                  <p>Sunset</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Clothing Suggestion -->
-            <div class="clothing-suggestion" id="clothing-suggestion">
-              👕 Comfortable, wear light clothes.
-            </div>
-          </section>
-
-          <!-- Forecast Section -->
-          <section class="forecast-part">
-            <h3>5-Day Forecast</h3>
-            <div class="forecast-container">
-              <div class="day-forecast">
-                <p class="day-name">Mon</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:30 / L:20</p>
-              </div>
-              <div class="day-forecast">
-                <p class="day-name">Tue</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:32 / L:22</p>
-              </div>
-              <div class="day-forecast">
-                <p class="day-name">Wed</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:31 / L:21</p>
-              </div>
-              <div class="day-forecast">
-                <p class="day-name">Thu</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:29 / L:19</p>
-              </div>
-              <div class="day-forecast">
-                <p class="day-name">Fri</p>
-                <img src="./assets/icons/default.svg" alt="Icon" />
-                <p class="temp-high-low">H:28 / L:18</p>
-              </div>
-            </div>
-          </section>
-
         </div>
-      </center>
 
-      <script src="assets/js/script.js"></script>
-      <script src="assets/js/particles.min.js"></script>
-      <script src="assets/js/app.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-      <script src="assets/js/security.js"></script>
+        <div class="info-text" id="infoText"></div>
 
-      <script>
-        // Alerts Toggle
-        function toggleAlerts() {
-          const content = document.querySelector(".alerts-content");
-          const icon = document.querySelector(".alerts-header i");
-          if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-            icon.classList.remove("bx-chevron-up");
-            icon.classList.add("bx-chevron-down");
-          } else {
-            content.style.maxHeight = content.scrollHeight + "px";
-            icon.classList.remove("bx-chevron-down");
-            icon.classList.add("bx-chevron-up");
-          }
-        }
-
-        // Sunrise & Sunset Times
-        function displaySunTimes() {
-          let now = new Date();
-          let sunrise = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 6, 0);
-          let sunset = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0);
-
-          function formatTime(date) {
-            let hours = date.getHours();
-            let minutes = date.getMinutes();
-            let ampm = hours >= 12 ? "PM" : "AM";
-            hours = hours % 12;
-            hours = hours ? hours : 12;
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            return hours + ":" + minutes + " " + ampm;
-          }
-
-          document.getElementById("sunrise-time").textContent = formatTime(sunrise);
-          document.getElementById("sunset-time").textContent = formatTime(sunset);
-        }
-
-        displaySunTimes();
-
-        // Clothing Suggestion
-        function updateClothingSuggestion() {
-          const tempEl = document.querySelector(".temp .numb");
-          const suggestionEl = document.getElementById("clothing-suggestion");
-          let temp = parseFloat(tempEl.textContent);
-          if (isNaN(temp)) temp = 25;
-
-          let suggestion = "";
-          if (temp <= 10) suggestion = "🧥 Wear a jacket! It's cold outside.";
-          else if (temp <= 20) suggestion = "🧣 Light sweater recommended.";
-          else if (temp <= 30) suggestion = "👕 Comfortable, wear light clothes.";
-          else suggestion = "🌞 Stay cool and hydrated!";
-          suggestionEl.textContent = suggestion;
-        }
-
-        updateClothingSuggestion();
-        setInterval(updateClothingSuggestion, 5000);
-      </script>
+        <div id="weatherContent" class="loading">
+            <div class="spinner"></div>
+            <div>Loading weather data...</div>
+        </div>
     </div>
-  </body>
+
+    <script>
+        let currentCity = 'Bangalore';
+        let weatherData = null;
+
+        // Initialize
+        async function init() {
+            await fetchWeather(currentCity);
+        }
+
+        // Fetch weather data
+        async function fetchWeather(city) {
+            try {
+                showInfo('Loading weather data...', 'info');
+                
+                // Simulated weather data
+                const mockData = {
+                    city: city,
+                    temp: Math.round(20 + Math.random() * 15),
+                    condition: ['Clear', 'Cloudy', 'Rainy', 'Sunny'][Math.floor(Math.random() * 4)],
+                    high: 32,
+                    low: 22,
+                    feelsLike: 28,
+                    humidity: Math.round(40 + Math.random() * 40),
+                    windSpeed: Math.round(5 + Math.random() * 15),
+                    uvIndex: Math.round(1 + Math.random() * 10),
+                    sunrise: '6:24 AM',
+                    sunset: '6:18 PM',
+                    hourly: generateHourlyData(),
+                    daily: generateDailyData()
+                };
+
+                weatherData = mockData;
+                renderWeather();
+                hideInfo();
+            } catch (error) {
+                showInfo('Failed to load weather data', 'error');
+            }
+        }
+
+        // Generate hourly data
+        function generateHourlyData() {
+            const hours = ['Now', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM'];
+            return hours.map((hour, i) => ({
+                time: hour,
+                temp: Math.round(25 + Math.random() * 8),
+                icon: './assets/icons/default.svg'
+            }));
+        }
+
+        // Generate daily data
+        function generateDailyData() {
+            const days = ['Today', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            return days.map(day => ({
+                day: day,
+                high: Math.round(28 + Math.random() * 8),
+                low: Math.round(18 + Math.random() * 6),
+                icon: './assets/icons/default.svg'
+            }));
+        }
+
+        // Render weather
+        function renderWeather() {
+            const content = document.getElementById('weatherContent');
+            
+            const clothingSuggestion = getClothingSuggestion(weatherData.temp);
+            
+            content.innerHTML = `
+                <div class="main-weather">
+                    <div class="city-name">${weatherData.city}</div>
+                    <div class="temperature">${weatherData.temp}°</div>
+                    <div class="condition">${weatherData.condition}</div>
+                    <div class="temp-range">H:${weatherData.high}° L:${weatherData.low}°</div>
+                    <img src="./assets/icons/default.svg" alt="Weather" class="weather-icon">
+                </div>
+
+                ${weatherData.temp > 35 ? `
+                <div class="alert-banner">
+                    <i class="bx bx-error-circle alert-icon"></i>
+                    <div class="alert-content">
+                        <div class="alert-title">Heat Advisory</div>
+                        <div class="alert-text">High temperatures expected. Stay hydrated.</div>
+                    </div>
+                    <i class="bx bx-chevron-right" style="color: rgba(255,255,255,0.5);"></i>
+                </div>
+                ` : ''}
+
+                <div class="suggestion-card">
+                    <div class="suggestion-icon">${clothingSuggestion.icon}</div>
+                    <div class="suggestion-text">${clothingSuggestion.text}</div>
+                </div>
+
+                <div class="hourly-section">
+                    <div class="section-title">Hourly Forecast</div>
+                    <div class="hourly-container">
+                        <div class="hourly-scroll">
+                            ${weatherData.hourly.map(hour => `
+                                <div class="hour-item">
+                                    <div class="hour-time">${hour.time}</div>
+                                    <img src="${hour.icon}" class="hour-icon" alt="">
+                                    <div class="hour-temp">${hour.temp}°</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="daily-section">
+                    <div class="section-title">10-Day Forecast</div>
+                    <div class="daily-container">
+                        ${weatherData.daily.map(day => `
+                            <div class="day-item">
+                                <div class="day-name">${day.day}</div>
+                                <img src="${day.icon}" class="day-icon" alt="">
+                                <div class="day-temps">
+                                    <span class="temp-low">${day.low}°</span>
+                                    <span class="temp-high">${day.high}°</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <div class="detail-label">
+                            <i class="bx bxs-thermometer"></i>
+                            Feels Like
+                        </div>
+                        <div class="detail-value">${weatherData.feelsLike}°</div>
+                        <div class="detail-description">Similar to actual temperature</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-label">
+                            <i class="bx bxs-droplet-half"></i>
+                            Humidity
+                        </div>
+                        <div class="detail-value">${weatherData.humidity}%</div>
+                        <div class="detail-description">The dew point is ${Math.round(weatherData.temp - 5)}°</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-label">
+                            <i class="bx bx-wind"></i>
+                            Wind
+                        </div>
+                        <div class="detail-value">${weatherData.windSpeed}</div>
+                        <div class="detail-description">km/h</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-label">
+                            <i class="bx bx-sun"></i>
+                            UV Index
+                        </div>
+                        <div class="detail-value">${weatherData.uvIndex}</div>
+                        <div class="detail-description">${getUVDescription(weatherData.uvIndex)}</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-label">
+                            <i class="bx bx-sunrise"></i>
+                            Sunrise
+                        </div>
+                        <div class="detail-value" style="font-size: 20px;">${weatherData.sunrise}</div>
+                        <div class="detail-description">Sunset: ${weatherData.sunset}</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-label">
+                            <i class="bx bx-moon"></i>
+                            Sunset
+                        </div>
+                        <div class="detail-value" style="font-size: 20px;">${weatherData.sunset}</div>
+                        <div class="detail-description">Sunrise: ${weatherData.sunrise}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Clothing suggestion
+        function getClothingSuggestion(temp) {
+            if (temp <= 10) return { icon: '🧥', text: 'Bundle up! Wear a warm jacket and layers.' };
+            if (temp <= 20) return { icon: '🧣', text: 'A light sweater or jacket would be comfortable.' };
+            if (temp <= 30) return { icon: '👕', text: 'Light and breathable clothing recommended.' };
+            return { icon: '🌞', text: 'Stay cool with light clothes and stay hydrated!' };
+        }
+
+        // UV description
+        function getUVDescription(uv) {
+            if (uv <= 2) return 'Low';
+            if (uv <= 5) return 'Moderate';
+            if (uv <= 7) return 'High';
+            if (uv <= 10) return 'Very High';
+            return 'Extreme';
+        }
+
+        // Search city
+        function searchCity(city) {
+            if (city.trim()) {
+                currentCity = city;
+                fetchWeather(city);
+            }
+        }
+
+        // Detect location
+        function detectLocation() {
+            if (navigator.geolocation) {
+                showInfo('Detecting location...', 'info');
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        fetchWeather('Your Location');
+                    },
+                    error => {
+                        showInfo('Location access denied. Using default city.', 'error');
+                        setTimeout(() => hideInfo(), 3000);
+                    }
+                );
+            } else {
+                showInfo('Geolocation not supported', 'error');
+            }
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            const body = document.body;
+            const container = document.querySelector('.container');
+            const toggle = document.querySelector('.theme-toggle i');
+            
+            if (body.style.background === 'rgb(10, 36, 99)' || !body.style.background) {
+                body.style.background = '#1e3a8a';
+                container.style.background = '#1e3a8a';
+                toggle.className = 'bx bx-sun';
+            } else {
+                body.style.background = '#0A2463';
+                container.style.background = '#0A2463';
+                toggle.className = 'bx bx-moon';
+            }
+        }
+
+        // Show info
+        function showInfo(message, type) {
+            const info = document.getElementById('infoText');
+            info.textContent = message;
+            info.className = 'info-text show';
+            
+            if (type === 'error') {
+                info.style.background = 'rgba(255, 59, 48, 0.2)';
+                info.style.borderColor = 'rgba(255, 59, 48, 0.4)';
+            } else {
+                info.style.background = 'rgba(52, 199, 89, 0.2)';
+                info.style.borderColor = 'rgba(52, 199, 89, 0.4)';
+            }
+        }
+
+        // Hide info
+        function hideInfo() {
+            const info = document.getElementById('infoText');
+            info.classList.remove('show');
+        }
+
+        // Initialize app
+        init();
+    </script>
+</body>
 </html>
