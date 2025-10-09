@@ -35,7 +35,20 @@ To run this project locally on your machine:
    ```bash
    cd weather-app
     ```
-3. **Open the Project:**
+3. **Create a config.json file:**
+    - **Inside the project directory, create a new file named config.json.**
+    - **Add the following sample content:**
+    ```bash
+    {
+       "API_KEY": "your_api_key_here"
+    }
+    ```
+4. **Get the OpenWeather API key**
+    - **Visit https://openweathermap.org/api**
+    - **Sign up (if you dont have an account) and generate the free API key.**
+    - **Copy your API key and replace "your_api_key_here" in the config.json file.**
+
+5. **Open the Project:**
    - **Open the index.html file in your web browser.**
 ## Usage
   -  **Open the index.html file in a web browser.**
